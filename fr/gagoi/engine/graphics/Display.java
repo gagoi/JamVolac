@@ -15,6 +15,7 @@ public class Display extends JFrame {
 		this.getContentPane().add(this.canvas);
 		this.setSize(size);
 		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	public void activeRender(boolean needRender) {
