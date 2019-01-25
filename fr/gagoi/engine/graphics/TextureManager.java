@@ -15,7 +15,7 @@ public class TextureManager {
 	public static void loadTexture(String path, String id) {
 		if (!textures.containsKey(id)) {
 			try {
-				File f = new File(System.getenv("ImagePath").concat("/textures/").concat(path));
+				File f = new File(System.getenv("resourcesPath") + "/textures/" + path);
 				System.out.println(f.getAbsolutePath());
 				BufferedImage img = ImageIO.read(f);
 				textures.put(id, img);
