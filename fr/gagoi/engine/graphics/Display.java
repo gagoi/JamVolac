@@ -1,6 +1,7 @@
 package fr.gagoi.engine.graphics;
 
 import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -20,5 +21,9 @@ public class Display extends JFrame {
 
 	public void activeRender(boolean needRender) {
 		this.canvas.setRenderNeeding(needRender);
+	}
+
+	public List<IRenderable> getElements() {
+		return canvas.renderables;
 	}
 }

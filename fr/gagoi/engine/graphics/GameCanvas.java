@@ -12,7 +12,7 @@ public class GameCanvas extends Canvas {
 
 	private BufferedImage[] img;
 	private boolean needRender;
-	private List<IRenderable> renderables;
+	protected List<IRenderable> renderables;
 	private Dimension size;
 
 	public GameCanvas(Dimension size, int nbLayer) {

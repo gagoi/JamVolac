@@ -3,11 +3,12 @@ package fr.gagoi.engine.entities;
 import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
+import java.util.List;
 
+import fr.gagoi.engine.IGameElement;
 import fr.gagoi.engine.graphics.IRenderable;
 
-public class Entity implements IRenderable, IUpdatable {
+public class Entity extends IGameElement implements IRenderable, IUpdatable {
 
 	private Hitbox hitbox;
 	private String id;
@@ -43,7 +44,7 @@ public class Entity implements IRenderable, IUpdatable {
 	}
 
 	@Override
-	public void update(HashMap<String, IUpdatable> map) {
+	public void update(List<IUpdatable> map) {
 		
 	}
 	

@@ -1,10 +1,12 @@
 package fr.gagoi.engine;
 
 import java.awt.Dimension;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.gagoi.engine.entities.IUpdatable;
 import fr.gagoi.engine.graphics.Display;
+import fr.gagoi.engine.graphics.IRenderable;
 
 public class Game implements Runnable {
 
@@ -12,7 +14,7 @@ public class Game implements Runnable {
 
 	private Display window;
 	private boolean isRunning;
-	private HashMap<String, IUpdatable> updatables = new HashMap<String, IUpdatable>();
+	private static List<IUpdatable> updatables = new ArrayList<IUpdatable>();
 
 	public static void init(String name, Dimension size, int nbLayer) {
 		if (game == null) {
@@ -27,13 +29,31 @@ public class Game implements Runnable {
 		game.window.setVisible(true);
 	}
 
+	public static void addElement(IGameElement element) {
+		if (element instanceof IUpdatable) {
+			if (!updatables.contains((IUpdatable) element)) {
+				updatables.add((IUpdatable) element);
+			} else {
+				System.out.println(String.format("UPDATE : ID already used when adding : ", element.toString()));
+			}
+		}
+		
+		if (element instanceof IRenderable) {
+			if (!game.window.getElements().contains((IRenderable) element)) {
+				game.window.getElements().add((IRenderable) element);
+			} else {
+				System.out.println(String.format("RENDER : ID already used when adding : ", element.toString()));
+			}
+		}
+	}
+
 	@Override
 	public void run() {
 		isRunning = true;
 
 		while (isRunning)
-			updatables.forEach((k, v) -> {
-				v.update(updatables);
+			updatables.forEach((e) -> {
+				e.update(updatables);
 			});
 	}
 }
