@@ -1,6 +1,9 @@
 package fr.gagoi.engine.graphics;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -12,9 +15,13 @@ public class TextureManager {
 	public static void loadTexture(String path, String id) {
 		if (!textures.containsKey(id)) {
 			try {
-				BufferedImage img = ImageIO.read(TextureManager.class.getResource(path));
+				File f = new File(System.getenv("ImagePath").concat("/textures/").concat(path));
+				System.out.println(f.getAbsolutePath());
+				BufferedImage img = ImageIO.read(f);
 				textures.put(id, img);
-			} catch (Exception e) {
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
