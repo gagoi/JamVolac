@@ -11,7 +11,7 @@ public class Loader {
 	private int x;
 	private int y;
 	private char[][] charMap;
-	private HashMap<String, Integer[]> pickups = new HashMap<String, Integer[]>();
+	private HashMap<String, Integer[]> pickups;
 
 	public void loadLevel(String filename) {
 		Properties properties = new Properties();
@@ -29,9 +29,12 @@ public class Loader {
 				e.printStackTrace();
 			}
 		}
+		
+		// Tailles
 		x = Integer.parseInt(properties.getProperty("x"));
 		y = Integer.parseInt(properties.getProperty("y"));
 	    
+		// TileMap
 	    charMap = new char[x][y];
 	    String mapStr[] = new String[x*y];
 	    mapStr = properties.getProperty("map").split("");
@@ -42,6 +45,9 @@ public class Loader {
 			}
 		}
 	    
+	    
+	    // Pickups
+	    pickups = new HashMap<String, Integer[]>()
 	    String[] namePickups = properties.getProperty("pickups").split(",");
 	    String[] strPosPickUp;
 	    Integer[] posPickups = new Integer[2];
@@ -55,6 +61,22 @@ public class Loader {
 	    	
 	    	pickups.put(namePickups[i], posPickups);
 		}
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public char[][] getMap() {
+		return charMap;
+	}
+	
+	public HashMap<String, Integer[]> getPickups() {
+		return pickups;
 	}
 
 }
