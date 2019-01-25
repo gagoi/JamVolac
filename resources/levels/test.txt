@@ -1,0 +1,7 @@
+x=5
+y=5
+map=AAAAAAAAAAAAAAAAAAAAAAAAA
+pickups=p1,p2,p3
+p1=0,0
+p2=1,2
+p3=3,1
