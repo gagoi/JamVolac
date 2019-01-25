@@ -20,13 +20,13 @@ public class Game implements Runnable {
 		if (game == null) {
 			game = new Game();
 			game.window = new Display(name, size, nbLayer);
-			game.window.setVisible(true);
 			game.window.activeRender(true);
 		}
 	}
 
 	public static void start() {
 		game.window.setVisible(true);
+		new Thread(game).start();
 	}
 
 	public static void addElement(IGameElement element) {
@@ -50,10 +50,11 @@ public class Game implements Runnable {
 	@Override
 	public void run() {
 		isRunning = true;
-
-		while (isRunning)
+		while (isRunning) {
 			updatables.forEach((e) -> {
 				e.update(updatables);
 			});
+			game.window.repaint();
+		}
 	}
 }

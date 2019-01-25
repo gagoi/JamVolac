@@ -7,14 +7,11 @@ public class Hitbox {
 	private Polygon p;
 
 	public Hitbox(int x, int y, int width, int height) {
+		p = new Polygon();
 		p.addPoint(x, y);
 		p.addPoint(x + width, y);
 		p.addPoint(x + width, y + height);
 		p.addPoint(x, y + height);
-	}
-
-	public Hitbox(Polygon p2) {
-		this.p = new Polygon(p2.xpoints, p2.ypoints, p2.npoints);
 	}
 
 	public boolean collide(Hitbox hitbox) {
@@ -27,5 +24,17 @@ public class Hitbox {
 	
 	public int getY() {
 		return p.ypoints[0];
+	}
+	
+	public int getWidth() {
+		return p.xpoints[1] - p.xpoints[0];
+	}
+	
+	public int getHeight() {
+		return p.ypoints[2] - p.ypoints[0];
+	}
+
+	public void translate(int i, int j) {
+		p.translate(i, j);
 	}
 }

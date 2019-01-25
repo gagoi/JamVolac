@@ -7,12 +7,12 @@ import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class Display extends JFrame {
-	private GameCanvas canvas;
+	private GamePanel canvas;
 
 	public Display(String title, Dimension size, int nbLayer) {
 		this.setTitle(title);
-		this.setUndecorated(true);
-		this.canvas = new GameCanvas(size, nbLayer);
+		//this.setUndecorated(true);
+		this.canvas = new GamePanel(size, nbLayer);
 		this.getContentPane().add(this.canvas);
 		this.setSize(size);
 		this.setResizable(false);

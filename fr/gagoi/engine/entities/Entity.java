@@ -7,6 +7,7 @@ import java.util.List;
 
 import fr.gagoi.engine.IGameElement;
 import fr.gagoi.engine.graphics.IRenderable;
+import fr.gagoi.engine.graphics.TextureManager;
 
 public class Entity extends IGameElement implements IRenderable, IUpdatable {
 
@@ -18,6 +19,7 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 	
 	public Entity(String id) {
 		this.id = id;
+		this.nbSprites = 1;
 	}
 	
 	public Entity(String id, int nbSprites, int vitesse) {
@@ -27,13 +29,20 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 		this.vitesse = vitesse;
 	}
 	
-	public Entity addHitbox(Polygon p) {
-		this.hitbox = new Hitbox(p);
+	public Entity(String id, Hitbox hitbox) {
+		this(id);
+		this.hitbox = hitbox;
+	}
+	
+	public Entity addHitbox(int x, int y, int w, int h) {
+		this.hitbox = new Hitbox(x, y, w, h);
 		return this;
 	}
 	
 	@Override
 	public void render(Graphics g) {
+		if (nbSprites == 1) 
+			g.drawImage(TextureManager.getTexture(getId()), hitbox.getX(), hitbox.getY(), hitbox.getWidth(), hitbox.getHeight(), null);
 		if (nbSprites > 1)
 			g.drawImage(img[(int) ((System.nanoTime() / (1000 / vitesse) ) % nbSprites)], hitbox.getX(), hitbox.getY(), null);
 	}
@@ -45,11 +54,16 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 
 	@Override
 	public void update(List<IUpdatable> map) {
-		
+		//hitbox.translate(1, 0);
 	}
 	
 	@Override
 	public String getId() {
 		return this.id;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + String.format("{%s, %d, %d, %d, %d}", getId(), hitbox.getX(), hitbox.getY(), hitbox.getWidth(), hitbox.getHeight());
 	}
 }
