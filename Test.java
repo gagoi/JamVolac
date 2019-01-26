@@ -6,6 +6,8 @@ import java.util.Properties;
 import fr.gagoi.engine.Game;
 import fr.gagoi.engine.entities.Player;
 import fr.gagoi.engine.graphics.TextureManager;
+import fr.gagoi.music.MusicManager;
+import fr.gagoi.music.SoundManager;
 import fr.wiyochi.level.Level;
 
 public class Test {
@@ -22,6 +24,22 @@ public class Test {
 		Game.start();
 		Game.addElement(l);
 		Game.addElement(e);
+		
+		MusicManager m = new MusicManager();
+		try {
+			m.AddAudio("Mariachis");
+			m.Play("Mariachis");
+		} catch (Exception err) {
+			err.printStackTrace();
+		}
+		
+		SoundManager s = new SoundManager();
+		try {
+			s.AddAudio("Chute");
+			s.Play("Chute");
+		} catch (Exception err) {
+			err.printStackTrace();
+		}		
 	}
 
 	private static void loadTextures() {
