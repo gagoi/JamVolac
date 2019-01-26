@@ -87,7 +87,7 @@ public class Level extends Entity {
 	}
 	
 	private boolean isAnimated(char c) {
-		String codes = "B";
+		String codes = "BCD";
 		return codes.contains("" + c);
 	}
 	

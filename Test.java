@@ -21,10 +21,10 @@ public class Test {
 		loadTextures();
 		//TextureManager.loadTexture("player1", "player");
 
-		Level l = new Level(0, System.getenv("resourcesPath") + "/levels/level1");
+		//Level l = new Level(0, System.getenv("resourcesPath") + "/levels/level1");
 		Player e = new Player();
 		
-		Game.addElement(l);
+		//Game.addElement(l);
 		Game.addElement(e);
 		
 		
