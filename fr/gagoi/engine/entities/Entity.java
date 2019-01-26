@@ -20,7 +20,7 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 	private String id;
 	private int nbSprites;
 	private double vitesse;
-	private BufferedImage[] img;
+	protected BufferedImage[] img;
 	private SoundManager sound;
 	private boolean isActive = true, needRender = true;
 

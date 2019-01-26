@@ -1,5 +1,9 @@
 A=air
 B=basepartition
+B1=basepartition1
+B2=basepartition2
+B3=basepartition3
+B4=basepartition4
 C=finpartitiondroite
 D=finpartitiongauche
 player=player1

@@ -17,7 +17,8 @@ public class TextureManager {
 		if (!textures.containsKey(id)) {
 			File f = null;
 			try {
-				f = new File(System.getenv("resourcesPath") + "/textures/" + path + ".png");
+				f = new File(System.getenv("resourcesPath")
+						+ "/textures/" + path + ".png");
 				BufferedImage img = ImageIO.read(f);
 				textures.put(id, img);
 			} catch (FileNotFoundException e) {
