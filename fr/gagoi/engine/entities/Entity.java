@@ -1,7 +1,6 @@
 package fr.gagoi.engine.entities;
 
 import java.awt.Graphics;
-import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import fr.gagoi.engine.graphics.TextureManager;
 
 public class Entity extends IGameElement implements IRenderable, IUpdatable {
 
-	private Hitbox hitbox;
+	protected Hitbox hitbox;
 	private String id;
 	private int nbSprites;
 	private int vitesse;
@@ -33,12 +32,7 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 		this(id);
 		this.hitbox = hitbox;
 	}
-	
-	public Entity addHitbox(int x, int y, int w, int h) {
-		this.hitbox = new Hitbox(x, y, w, h);
-		return this;
-	}
-	
+
 	@Override
 	public void render(Graphics g) {
 		if (nbSprites == 1) 
@@ -54,7 +48,6 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 
 	@Override
 	public void update(List<IUpdatable> map) {
-		//hitbox.translate(1, 0);
 	}
 	
 	@Override

@@ -15,7 +15,7 @@ public class TextureManager {
 	public static void loadTexture(String path, String id) {
 		if (!textures.containsKey(id)) {
 			try {
-				File f = new File(System.getenv("resourcesPath") + "/textures/" + path);
+				File f = new File(System.getenv("resourcesPath") + "/textures/" + path + ".png");
 				BufferedImage img = ImageIO.read(f);
 				textures.put(id, img);
 			} catch (FileNotFoundException e) {
@@ -29,6 +29,7 @@ public class TextureManager {
 	}
 	
 	public static BufferedImage getTexture(String id) {
-		return textures.getOrDefault(id, new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB));
+		return textures.get(id);
+		//return textures.getOrDefault(id, new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB));
 	}
 }

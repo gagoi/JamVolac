@@ -37,4 +37,9 @@ public class Hitbox {
 	public void translate(int i, int j) {
 		p.translate(i, j);
 	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + String.format("{%d, %d, %d, %d}", getX(), getY(), getWidth(), getHeight());
+	}
 }
