@@ -18,10 +18,11 @@ public abstract class EGuiElement extends IGameElement implements IUpdatable, IR
 		this.id = id;
 		this.hitbox = new Polygon(new int[] { x, x + w, x + w, x }, new int[] { y, y, y + h, y + h }, 4);
 	}
-
-	public abstract void onClick();
 	
-	public abstract void onMouseOver();
+	public EGuiElement(String id, Polygon p) {
+		this.id = id;
+		this.hitbox = p;
+	}
 
 	public boolean isInside(Point p) {
 		return hitbox.contains(p);

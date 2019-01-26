@@ -47,4 +47,9 @@ public class Player extends Entity {
 		}
 
 	}
+	
+	@Override
+	public int getLayer() {
+		return 2;
+	}
 }
