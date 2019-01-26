@@ -70,4 +70,8 @@ public class Level extends Entity {
 		String codes = "BCD";
 		return codes.contains("" + c);
 	}
+	
+	public ArrayList<Pickup> getPickups(){
+		return(pickups);
+	}
 }

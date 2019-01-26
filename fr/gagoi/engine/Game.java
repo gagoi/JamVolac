@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.gagoi.engine.entities.IUpdatable;
+import fr.gagoi.engine.entities.Pickup;
 import fr.gagoi.engine.graphics.Display;
 import fr.gagoi.engine.graphics.IRenderable;
 
 import fr.gagoi.music.MusicManager;
+import fr.wiyochi.level.Level;
 
 public class Game implements Runnable {
 
@@ -58,8 +60,18 @@ public class Game implements Runnable {
 				System.out.println(String.format("RENDER : ID already used when adding : ", element.toString()));
 			}
 		}
+		
+		if (element instanceof Level) {
+			loadPickups((Level) element);
+		}
 	}
-
+	
+	private static void loadPickups(Level l){
+		for (Pickup p : l.getPickups()) {
+			addElement(p);
+		}
+	}
+	
 	@Override
 	public void run() {
 		isRunning = true;
