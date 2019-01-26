@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 import fr.gagoi.engine.Game;
+import fr.gagoi.engine.entities.Entity;
+import fr.gagoi.engine.entities.Hitbox;
 import fr.gagoi.engine.entities.Player;
 import fr.gagoi.engine.graphics.TextureManager;
 import fr.gagoi.engine.graphics.GUI.MainMenu;
@@ -19,12 +21,14 @@ public class Test {
 		loadTextures();
 		TextureManager.loadTexture("player1", "player");
 
-		//Level l = new Level(0, System.getenv("resourcesPath") + "/levels/level1");
+		Level l = new Level(0, System.getenv("resourcesPath") + "/levels/level1");
 		Player e = new Player();
-
+		Entity p1 = new Entity("pickup1", 5.0, 4, new Hitbox(300, 500, 8, 21));
+		p1.LoadAnimation("Animation1.");
 		
 		//Game.addElement(l);
 		Game.addElement(e);
+		Game.addElement(p1);
 		
 		
 		
