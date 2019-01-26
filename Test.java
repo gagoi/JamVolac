@@ -10,7 +10,6 @@ import fr.gagoi.engine.entities.Entity;
 import fr.gagoi.engine.entities.Hitbox;
 import fr.gagoi.engine.entities.Player;
 import fr.gagoi.engine.graphics.TextureManager;
-import fr.wiyochi.level.Level;
 
 public class Test {
 
@@ -20,7 +19,6 @@ public class Test {
 		loadTextures();
 		//TextureManager.loadTexture("player1", "player");
 
-		Level l = new Level(0, System.getenv("resourcesPath") + "/levels/level1");
 		Player e = new Player();
 
 		Game.start();
@@ -34,7 +32,7 @@ public class Test {
 				g.fillRect(0, 500, 3000, 100);
 			}
 		});
-		Game.addElement(new Entity("platform2", new Hitbox(400, 400, 100, 150)){
+		Game.addElement(new Entity("platform2", new Hitbox(400, 100, 100, 2000)){
 			@Override
 			public void render(Graphics g) {
 				super.render(g);

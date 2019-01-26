@@ -22,24 +22,45 @@ public class Hitbox {
 		return p.intersects(hitbox.p.getBounds2D());
 	}
 
-	public int whereCollision(Hitbox hitbox, float dx, float dy) {
+	public int whereCollisionX(Hitbox hitbox, float dx, float dy) {
 		int location = 0;
 		/*
 		 * location = 1 : l'objet collisionne � droite location = 2 : l'objet
 		 * collisionne en bas location = 3 : l'objet collisionne � gauche location = 4 :
 		 * l'objet collisionne en haut
 		 */
-		int x1 = hitbox.getX();
-		int x2 = hitbox.getX() + hitbox.getWidth();
-		int y1 = hitbox.getY();
-		int y2 = hitbox.getY() + hitbox.getHeight();
 
-		//System.out.println("Player : " + this.toString());
-		
+		// System.out.println("Player : " + this.toString());
+
 		if (dy > 0)
 			location = 2;
 		else if (dy < 0)
 			location = 4;
+		/*
+		 * if ((this.getX() <= x2) && (this.getX() + this.getWidth() >= x1)) { if
+		 * (this.getY() + dy > y2) location = 4; else if (this.getY() + this.getHeight()
+		 * + dy < y1) location = 2; } else if (this.getX() + this.getWidth() + dx > x1)
+		 * location = 1; else if (this.getX() + dx < x2) location = 3;
+		 * 
+		 * // if (this.getY()+this.getHeight()+dy>y1) // location = 2;
+		 */
+		return (location);
+	}
+
+	public int whereCollisionY(Hitbox hitbox, float dx, float dy) {
+		int location = 0;
+		/*
+		 * location = 1 : l'objet collisionne � droite location = 2 : l'objet
+		 * collisionne en bas location = 3 : l'objet collisionne � gauche location = 4 :
+		 * l'objet collisionne en haut
+		 */
+
+		// System.out.println("Player : " + this.toString());
+
+		if (dx > 0)
+			location = 1;
+		else if (dx < 0)
+			location = 3;
 		/*
 		 * if ((this.getX() <= x2) && (this.getX() + this.getWidth() >= x1)) { if
 		 * (this.getY() + dy > y2) location = 4; else if (this.getY() + this.getHeight()
