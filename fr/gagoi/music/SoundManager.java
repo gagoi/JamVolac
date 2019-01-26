@@ -1,40 +1,41 @@
 package fr.gagoi.music;
 
-import java.io.File; 
-import javax.sound.sampled.AudioInputStream; 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class MusicManager implements IAudio {
+public class SoundManager implements IAudio {
 	
-	private List<File> ListeMusic;
-	private AudioInputStream MusicStream;
+	private List<File> ListeSound;
+	private AudioInputStream SoundStream;
 	private Clip clip;
 	
-	public MusicManager()
+	public SoundManager()
 	{
-		ListeMusic = new ArrayList<>();
+		ListeSound = new ArrayList<>();
 	}
 	
+	@Override
 	public void AddAudio(String name)
 	{
-		File file = new File(System.getenv("resourcesPath") + "/music/" + name);
-		ListeMusic.add(file);
+		File file = new File(System.getenv("resourcesPath") + "/sound/" + name);
+		ListeSound.add(file);
 	}
-	
+
+	@Override
 	public void LoadAudio(int index)
 			throws IOException, UnsupportedAudioFileException,
 			IndexOutOfBoundsException, LineUnavailableException
 	{
 		try {
-			MusicStream = AudioSystem.getAudioInputStream(ListeMusic.get(index));
+			SoundStream = AudioSystem.getAudioInputStream(ListeSound.get(index));
 		} catch (IndexOutOfBoundsException e) {
 			System.out.println("L'index donné est trop grand");
 			throw(e);
@@ -53,19 +54,20 @@ public class MusicManager implements IAudio {
 			throw(e);
 		}
 	}
-	
+
+	@Override
 	public AudioInputStream getAudioStream()
 	{
-		return(MusicStream);
+		return(SoundStream);
 	}
-	
+
+	@Override
 	public void InitClip()
-		throws IOException, LineUnavailableException
+			throws IOException, LineUnavailableException
 	{
 		try {
 			clip = AudioSystem.getClip();
-			clip.open(MusicStream);
-			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.open(SoundStream);
 		} catch (IOException e) {
 			System.out.println("Le fichier n'a pas été trouvé");
 			throw(e);
@@ -74,17 +76,20 @@ public class MusicManager implements IAudio {
 			throw(e);
 		}
 	}
-	
+
+	@Override
 	public void CloseClip()
 	{
 		clip.close();
 	}
-	
+
+	@Override
 	public Clip GetClip()
 	{
 		return(clip);
 	}
-	
+
+	@Override
 	public void Play()
 	{
 		clip.start();

@@ -4,10 +4,7 @@ import fr.gagoi.engine.Game;
 import fr.gagoi.engine.entities.Entity;
 import fr.gagoi.engine.graphics.TextureManager;
 import fr.gagoi.music.MusicManager;
-
-import java.io.IOException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.sound.sampled.LineUnavailableException;
+import fr.gagoi.music.SoundManager;
 
 public class Test {
 
@@ -22,11 +19,20 @@ public class Test {
 		
 		MusicManager m = new MusicManager();
 		try {
-			m.AddMusic("Mariachis.wav");
-			m.LoadMusic(0);
+			m.AddAudio("Mariachis.wav");
+			m.LoadAudio(0);
 			m.Play();
 		} catch (Exception err) {
 			err.printStackTrace();
 		}
+		
+		SoundManager s = new SoundManager();
+		try {
+			s.AddAudio("Chute.wav");
+			s.LoadAudio(0);
+			s.Play();
+		} catch (Exception err) {
+			err.printStackTrace();
+		}		
 	}
 }
