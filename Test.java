@@ -16,7 +16,7 @@ public class Test {
 		loadTextures();
 		TextureManager.loadTexture("player", "player");
 
-		Level l = new Level(0, System.getenv("resourcesPath") + "/levels/test.txt");
+		Level l = new Level(0, System.getenv("resourcesPath") + "/levels/level1");
 		Player e = new Player();
 
 		Game.start();
