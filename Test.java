@@ -19,16 +19,13 @@ public class Test {
 		Game.init("TEST", new Dimension(1280, 720), 2);
 
 		loadTextures();
-		//TextureManager.loadTexture("player1", "player");
+		TextureManager.loadTexture("player1", "player");
 
 		Level l = new Level(0, System.getenv("resourcesPath") + "/levels/level1");
 		Player e = new Player();
-		Entity p1 = new Entity("pickup1", 5.0, 4, new Hitbox(300, 500, 8, 21));
-		p1.LoadAnimation("Animation1.");
 		
-		//Game.addElement(l);
+		Game.addElement(l);
 		Game.addElement(e);
-		Game.addElement(p1);
 		
 		
 		

@@ -31,7 +31,9 @@ public class Level extends Entity {
 		
 		pickups = new ArrayList<Pickup>();
 		mapPickups.forEach((k, v) -> {
-			pickups.add(new Pickup(k, new Hitbox(v[0], v[1], 32, 32)));
+			Pickup p1 = new Pickup(k, 4, 4, new Hitbox(v[0], v[1], 32, 32));
+			p1.LoadAnimation(k);
+			pickups.add(p1);
 			System.out.println("pickup :" + k + " (" + v[0] + "," + v[1] + ")");
 		});
 		
