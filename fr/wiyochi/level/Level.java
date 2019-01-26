@@ -1,9 +1,9 @@
 package fr.wiyochi.level;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Properties;
 
 import fr.gagoi.engine.entities.Entity;
@@ -38,8 +38,11 @@ public class Level extends Entity {
 		
 		Loader loader = new Loader();
 		loader.loadLevel(filename);
+
 		
 		char[][] charMap = loader.getMap();
+
+		this.lvlImg = new BufferedImage(loader.getX() * 16, loader.getY() * 16, BufferedImage.TYPE_INT_ARGB);
 		
 		hitbox = new Hitbox();
 		
@@ -51,8 +54,15 @@ public class Level extends Entity {
 					hitbox.p.addPoint((x + 1) * 16, (y + 1) * 16);
 					hitbox.p.addPoint(x * 16, (y + 1) * 16);
 				}
+				
+				lvlImg.getGraphics().drawImage(TextureManager.getTexture(charMap[y][x] + ""), x * 16, y * 16, null);
 			}
 		}
+	}
+	
+	@Override
+	public void render(Graphics g) {
+		g.drawImage(lvlImg, 0, 0, null);
 	}
 	
 	private boolean isHard(char c) {

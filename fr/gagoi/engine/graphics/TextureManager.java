@@ -14,13 +14,15 @@ public class TextureManager {
 	
 	public static void loadTexture(String path, String id) {
 		if (!textures.containsKey(id)) {
+			File f = null;
 			try {
-				File f = new File(System.getenv("resourcesPath") + "/textures/" + path + ".png");
+				f = new File(System.getenv("resourcesPath") + "/textures/" + path + ".png");
 				BufferedImage img = ImageIO.read(f);
 				textures.put(id, img);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
+				System.err.println(f.getAbsolutePath());
 				e.printStackTrace();
 			}
 		} else {
