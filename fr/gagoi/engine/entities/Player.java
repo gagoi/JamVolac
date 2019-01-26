@@ -76,7 +76,10 @@ public class Player extends Entity {
 		switch(loc){
 		case(1) : dx=-dx;
 			break;
-		case(2): dy=0;
+		case(2): if(isJumping && dy>0) {
+				dy=0;
+				isJumping=false;
+			}
 			break;
 		case(3): dx=-dx;
 			break;
@@ -84,5 +87,6 @@ public class Player extends Entity {
 			break;
 		default : break;
 		}
+		System.out.println("Localisation = "+loc);
 	}
 }

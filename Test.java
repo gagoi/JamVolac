@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 import fr.gagoi.engine.Game;
+import fr.gagoi.engine.entities.Entity;
+import fr.gagoi.engine.entities.Hitbox;
 import fr.gagoi.engine.entities.Player;
 import fr.gagoi.engine.graphics.TextureManager;
 import fr.wiyochi.level.Level;
@@ -20,7 +22,9 @@ public class Test {
 		Player e = new Player();
 
 		Game.start();
-		Game.addElement(l);
+		//Game.addElement(l);
+		Game.addElement(new Entity("platform1", new Hitbox(0, 500, 3000, 100)));
+		Game.addElement(new Entity("platform2", new Hitbox(400, 400, 100, 150)));
 		Game.addElement(e);
 			
 	}
