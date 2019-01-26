@@ -66,7 +66,7 @@ public class Level extends Entity {
 	}
 	
 	private boolean isHard(char c) {
-		String codes = "A";
+		String codes = "BCD";
 		return codes.contains("" + c);
 	}
 }

@@ -27,6 +27,12 @@ public class Player extends Entity {
 			isJumping = true;
 			lastJumpUpdate = System.currentTimeMillis();
 		}
+		
+		for (IUpdatable obj : map) {
+			if(obj.hasInGameHitbox()) {
+				
+			}
+		}
 
 		if (vj != 0 && isJumping) {
 			long delta = System.currentTimeMillis() - lastJumpUpdate;
