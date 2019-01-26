@@ -1,13 +1,15 @@
 package fr.gagoi.music;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+
+import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -16,10 +18,11 @@ public class SoundManager implements IAudio {
 	private Map<String, File> ListeSound;
 	private AudioInputStream SoundStream;
 	private Clip clip;
+	FloatControl gainControl;
 	
 	public SoundManager()
 	{
-		ListeSound = new HashMap<>();
+		ListeSound = new HashMap<>(); 
 	}
 	
 	@Override
@@ -69,6 +72,7 @@ public class SoundManager implements IAudio {
 		try {
 			clip = AudioSystem.getClip();
 			clip.open(SoundStream);
+			gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		} catch (IOException e) {
 			System.out.println("Le fichier n'a pas été trouvé");
 			throw(e);
@@ -104,5 +108,17 @@ public class SoundManager implements IAudio {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void SetVolume(double v)
+	{
+		gainControl.setValue((float) (20.0 * Math.log10(v)));
+	}
+	
+	@Override
+	public double GetVolume()
+	{
+		return(Math.pow(10.0, gainControl.getValue() / 20.0));
 	}
 }
