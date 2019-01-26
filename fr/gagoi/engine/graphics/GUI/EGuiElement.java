@@ -1,9 +1,7 @@
 package fr.gagoi.engine.graphics.GUI;
 
-import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.util.List;
 
 import fr.gagoi.engine.IGameElement;
 import fr.gagoi.engine.entities.IUpdatable;
@@ -44,17 +42,8 @@ public abstract class EGuiElement extends IGameElement implements IUpdatable, IR
 	}
 
 	@Override
-	public void update(List<IUpdatable> map) {
-
-	}
-
-	@Override
 	public String getId() {
 		return this.id;
-	}
-
-	@Override
-	public void render(Graphics g) {
 	}
 
 	@Override

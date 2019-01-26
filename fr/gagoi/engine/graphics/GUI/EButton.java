@@ -1,19 +1,25 @@
 package fr.gagoi.engine.graphics.GUI;
 
+import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
-public abstract class EButton extends EGuiElement implements MouseListener{
+import fr.gagoi.engine.entities.IUpdatable;
 
+public abstract class EButton extends EGuiElement implements MouseListener {
+
+	private boolean needRender = true;
+	private boolean isActive = true;
 	Polygon p;
-	
+
 	public EButton(String id, Polygon p) {
 		super(id, p);
 	}
-	
+
 	public abstract void action();
-	
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (p.contains(e.getPoint()))
@@ -34,7 +40,31 @@ public abstract class EButton extends EGuiElement implements MouseListener{
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+
+	}
+	
+	@Override
+	public void render(Graphics g) {
+				
+	}
+	@Override
+	public void update(List<IUpdatable> list) {
+		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void setActive(boolean b) {
+		isActive = b;
+	}
+
+	@Override
+	public void setActiveRender(boolean b) {
+		needRender = b;
+	}
+	@Override
+	public boolean needRender() {
+		return needRender;
 	}
 
 }

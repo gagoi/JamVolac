@@ -18,14 +18,14 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 	private int vitesse;
 	private BufferedImage[] img;
 	private SoundManager sound;
-	
-	
+	private boolean isActive = true, needRender = true;
+
 	public Entity(String id) {
 		this.id = id;
 		this.nbSprites = 1;
 		sound = new SoundManager();
 	}
-	
+
 	public Entity(String id, int nbSprites, int vitesse) {
 		this(id);
 		this.img = new BufferedImage[nbSprites];
@@ -33,7 +33,7 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 		this.vitesse = vitesse;
 		sound = new SoundManager();
 	}
-	
+
 	public Entity(String id, Hitbox hitbox) {
 		this(id);
 		this.hitbox = hitbox;
@@ -42,33 +42,57 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 
 	@Override
 	public void render(Graphics g) {
-		if (nbSprites == 1) 
-			g.drawImage(TextureManager.getTexture(getId()), hitbox.getX(), hitbox.getY(), hitbox.getWidth(), hitbox.getHeight(), null);
-		if (nbSprites > 1)
-			g.drawImage(img[(int) ((System.nanoTime() / (1000 / vitesse) ) % nbSprites)], hitbox.getX(), hitbox.getY(), null);
+		if (needRender)
+			if (nbSprites == 1)
+				g.drawImage(TextureManager.getTexture(getId()), hitbox.getX(), hitbox.getY(), hitbox.getWidth(),
+						hitbox.getHeight(), null);
+			else if (nbSprites > 1)
+				g.drawImage(img[(int) ((System.nanoTime() / (1000 / vitesse)) % nbSprites)], hitbox.getX(),
+						hitbox.getY(), null);
 	}
-	
+
 	public SoundManager getSound() {
 		return this.sound;
 	}
-	
+
 	@Override
 	public int getLayer() {
 		return 1;
 	}
-	
+
+	@Override
+	public boolean hasInGameHitbox() {
+		return isActive;
+	}
 
 	@Override
 	public void update(List<IUpdatable> map) {
 	}
-	
+
 	@Override
 	public String getId() {
 		return this.id;
 	}
 	
 	@Override
+	public void setActive(boolean b) {
+		this.isActive = b;
+		
+	}
+
+	@Override
 	public String toString() {
-		return super.toString() + String.format("{%s, %d, %d, %d, %d}", getId(), hitbox.getX(), hitbox.getY(), hitbox.getWidth(), hitbox.getHeight());
+		return super.toString() + String.format("{%s, %d, %d, %d, %d}", getId(), hitbox.getX(), hitbox.getY(),
+				hitbox.getWidth(), hitbox.getHeight());
+	}
+
+	@Override
+	public void setActiveRender(boolean b) {
+		this.needRender = b;
+	}
+	
+	@Override
+	public boolean needRender() {
+		return needRender;
 	}
 }

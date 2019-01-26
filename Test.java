@@ -6,24 +6,35 @@ import java.util.Properties;
 import fr.gagoi.engine.Game;
 import fr.gagoi.engine.entities.Player;
 import fr.gagoi.engine.graphics.TextureManager;
+import fr.gagoi.engine.graphics.GUI.MainMenu;
 import fr.gagoi.music.MusicManager;
 import fr.gagoi.music.SoundManager;
 import fr.wiyochi.level.Level;
 
 public class Test {
-
+	
 	public static void main(String[] args) {
 		Game.init("TEST", new Dimension(1280, 720), 2);
 
 		loadTextures();
 		TextureManager.loadTexture("player1", "player");
 
-		Level l = new Level(0, System.getenv("resourcesPath") + "/levels/level1");
+		//Level l = new Level(0, System.getenv("resourcesPath") + "/levels/level1");
 		Player e = new Player();
 
-		Game.start();
-		Game.addElement(l);
+		
+		//Game.addElement(l);
 		Game.addElement(e);
+		
+		
+		
+		MainMenu menu = new MainMenu();
+		Game.setGameState(Game.STATE_MENU);
+		
+		
+
+		Game.start();
+		
 		
 		MusicManager m = new MusicManager();
 		try {
@@ -52,4 +63,5 @@ public class Test {
 			e.printStackTrace();
 		}
 	}
+	
 }
