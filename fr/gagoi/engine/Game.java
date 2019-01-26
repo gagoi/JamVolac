@@ -3,9 +3,12 @@ package fr.gagoi.engine;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.lang.Thread.State;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JFrame;
 
 import fr.gagoi.engine.entities.IUpdatable;
 import fr.gagoi.engine.entities.Pickup;
@@ -36,7 +39,6 @@ public class Game implements Runnable {
 			game = new Game();
 			game.window = new Display(name, size, nbLayer);
 			game.window.activeRender(true);
-			game.window.setBackground(Color.WHITE);;
 			game.window.getContentPane().setBackground(Color.WHITE);;
 			game.window.getContentPane().setVisible(true);
 			game.music = new MusicManager();
