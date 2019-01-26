@@ -2,17 +2,18 @@ package fr.wiyochi.level;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import fr.gagoi.engine.entities.Entity;
 import fr.gagoi.engine.entities.Hitbox;
+import fr.gagoi.engine.entities.Pickup;
 import fr.gagoi.engine.graphics.TextureManager;
 
 public class Level extends Entity {
 	
 	BufferedImage backgroundImg, lvlImg;
+	ArrayList<Pickup> pickups;
 	
 	public Level(int lvlId, String fileName) {
 		super("level_" + lvlId);
@@ -20,25 +21,19 @@ public class Level extends Entity {
 	}
 	
 	private void load(String filename) {
-		Properties properties = new Properties();
-		FileInputStream input = null;
-
-		try {
-			input = new FileInputStream(filename);
-			properties.load(input);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				input.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		Loader loader = new Loader();
 		loader.loadLevel(filename);
 
+		
+		HashMap<String, Integer[]> mapPickups = loader.getPickups();
+		System.out.println(mapPickups.get("note1")[0] + "-" + mapPickups.get("note1")[1]);
+		
+		pickups = new ArrayList<Pickup>();
+		mapPickups.forEach((k, v) -> {
+			pickups.add(new Pickup(k, new Hitbox(v[0], v[1], 32, 32)));
+			System.out.println("pickup :" + k + " (" + v[0] + "," + v[1] + ")");
+		});
 		
 		char[][] charMap = loader.getMap();
 
@@ -63,6 +58,9 @@ public class Level extends Entity {
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(lvlImg, 0, 0, null);
+		for (Pickup pickup : pickups) {
+			pickup.render(g);
+		}
 	}
 	
 	private boolean isHard(char c) {
