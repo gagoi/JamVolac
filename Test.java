@@ -28,8 +28,6 @@ public class Test {
 		MusicManager m = new MusicManager();
 		try {
 			m.AddAudio("Mariachis");
-			m.Play("Mariachis");
-			m.SetVolume(0.5);
 		} catch (Exception err) {
 			err.printStackTrace();
 		}
@@ -37,7 +35,6 @@ public class Test {
 		SoundManager s = new SoundManager();
 		try {
 			s.AddAudio("Chute");
-			s.Play("Chute");
 		} catch (Exception err) {
 			err.printStackTrace();
 		}		
