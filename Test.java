@@ -10,7 +10,7 @@ public class Test {
 		Game.init("TEST", new Dimension(1280, 720), 2);
 		Game.start();
 		
-		TextureManager.loadTexture("player", "player");
+		TextureManager.loadTexture("player1", "player");
 		
 		Player e = new Player();
 		Game.addElement(e);
