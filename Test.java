@@ -36,20 +36,6 @@ public class Test {
 
 		Game.start();
 		
-		
-		MusicManager m = new MusicManager();
-		try {
-			m.AddAudio("Mariachis");
-		} catch (Exception err) {
-			err.printStackTrace();
-		}
-		
-		SoundManager s = new SoundManager();
-		try {
-			s.AddAudio("Chute");
-		} catch (Exception err) {
-			err.printStackTrace();
-		}		
 	}
 
 	private static void loadTextures() {

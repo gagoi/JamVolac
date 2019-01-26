@@ -60,15 +60,25 @@ public class Game implements Runnable {
 				System.out.println(String.format("RENDER : ID already used when adding : ", element.toString()));
 			}
 		}
-		
-		if (element instanceof Level) {
-			loadPickups((Level) element);
+	}
+	
+	private static void loadPickups(String name_lvl){
+		Level l = null;
+		for (IUpdatable iUpdatable : updatables) {
+			if (((IGameElement) iUpdatable).getId().equals(name_lvl)) {
+				l = (Level) iUpdatable;
+				break;
+			}
+		}
+		for (Pickup p : l.getPickups()) {
+			addElement(p);
 		}
 	}
 	
-	private static void loadPickups(Level l){
-		for (Pickup p : l.getPickups()) {
-			addElement(p);
+	private static void unloadPickups(){
+		for (IUpdatable obj : updatables) {
+			if(obj instanceof Pickup)
+				updatables.remove(obj);
 		}
 	}
 	
@@ -157,6 +167,7 @@ public class Game implements Runnable {
 				enable("button_2");
 				enable("button_3");
 				enable("button_4");
+				unloadPickups();
 				break;
 			case STATE_LVL1:
 				enable("level_1");
@@ -168,7 +179,8 @@ public class Game implements Runnable {
 				disable("button_2");
 				disable("button_3");
 				disable("button_4");
-
+				unloadPickups();
+				loadPickups("level_1");
 				break;
 			case STATE_LVL2:
 				disable("level_1");
@@ -180,7 +192,8 @@ public class Game implements Runnable {
 				disable("button_2");
 				disable("button_3");
 				disable("button_4");
-
+				unloadPickups();
+				loadPickups("level_2");
 				break;
 			case STATE_LVL3:
 				disable("level_1");
@@ -192,7 +205,8 @@ public class Game implements Runnable {
 				disable("button_2");
 				disable("button_3");
 				disable("button_4");
-
+				unloadPickups();
+				loadPickups("level_3");
 				break;
 			case STATE_LVL4:
 				disable("level_1");
@@ -204,7 +218,8 @@ public class Game implements Runnable {
 				disable("button_2");
 				disable("button_3");
 				disable("button_4");
-
+				unloadPickups();
+				loadPickups("level_4");
 				break;
 			}
 
