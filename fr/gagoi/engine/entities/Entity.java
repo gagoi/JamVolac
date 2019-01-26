@@ -68,6 +68,11 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 	}
 	
 	@Override
+	public Hitbox getHitbox() {
+		return(this.hitbox);
+	}
+	
+	@Override
 	public String toString() {
 		return super.toString() + String.format("{%s, %d, %d, %d, %d}", getId(), hitbox.getX(), hitbox.getY(), hitbox.getWidth(), hitbox.getHeight());
 	}

@@ -22,6 +22,32 @@ public class Hitbox {
 		return p.intersects(hitbox.p.getBounds2D());
 	}
 	
+	public int whereCollision(Hitbox hitbox, float dx, float dy)
+	{
+		int location = 0;
+		/*
+		 *location = 1 : l'objet collisionne à droite
+		 *location = 2 : l'objet collisionne en bas
+		 *location = 3 : l'objet collisionne à gauche
+		 *location = 4 : l'objet collisionne en haut
+		 */
+		int x1 = hitbox.getX();
+		int x2 = hitbox.getX()+hitbox.getWidth();
+		int y1 = hitbox.getY();
+		int y2 = hitbox.getY()+hitbox.getHeight();
+		
+		if(this.getX()+this.getWidth()+dx>=x1)
+			location = 1;
+		else if (this.getY()+this.getHeight()+dy>=y1)
+			location = 2;
+		else if (this.getX()+dx<=x2)
+			location = 3;
+		else if (this.getY()+dy<=y2)
+			location = 4;
+		
+		return(location);
+	}
+	
 	public int getX() {
 		return p.xpoints[0];
 	}

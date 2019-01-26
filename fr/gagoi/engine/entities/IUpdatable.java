@@ -23,6 +23,8 @@ public interface IUpdatable {
 	 */
 	default public boolean hasInGameHitbox() {return true;};
 	
+	public Hitbox getHitbox();
+	
 	/*
 	 * Renvoie si oui ou non l'objet est cliquable.
 	 */
