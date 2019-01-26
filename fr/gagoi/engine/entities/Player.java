@@ -1,5 +1,6 @@
 package fr.gagoi.engine.entities;
 
+import java.util.Iterator;
 import java.util.List;
 
 import fr.gagoi.engine.inputs.Keyboard;
@@ -30,7 +31,7 @@ public class Player extends Entity {
 		
 		for (IUpdatable obj : map) {
 			if(obj.hasInGameHitbox()) {
-				
+				// TODO: Collisions?
 			}
 		}
 
