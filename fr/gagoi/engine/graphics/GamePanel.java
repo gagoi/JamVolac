@@ -54,4 +54,9 @@ public class GamePanel extends JPanel {
 	public void setRenderNeeding(boolean rend) {
 		needRender = rend;
 	}
+	
+	public void Scroll(double dx)
+	{
+		
+	}
 }
