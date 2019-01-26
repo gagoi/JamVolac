@@ -12,8 +12,7 @@ import fr.gagoi.engine.graphics.TextureManager;
 
 public class Level extends Entity {
 
-	BufferedImage backgroundImg;
-	BufferedImage[] lvlImg;
+	BufferedImage backgroundImg, lvlImg;
 	ArrayList<Pickup> pickups;
 	
 	public Level(int lvlId, String fileName) {
@@ -40,11 +39,11 @@ public class Level extends Entity {
 		
 		char[][] charMap = loader.getMap();
 		
-		this.lvlImg = new BufferedImage[4];
+		this.img = new BufferedImage[4];
 		hitbox = new Hitbox();
 		
 		for (int i=0; i<4; i++) {
-			this.lvlImg[i] = new BufferedImage(loader.getX() * 32,
+			this.img[i] = new BufferedImage(loader.getX() * 32,
 					loader.getY() * 32, BufferedImage.TYPE_INT_ARGB);
 	
 			for (int y = 0; y < charMap.length; y++) {
@@ -55,10 +54,19 @@ public class Level extends Entity {
 						hitbox.p.addPoint((x + 1) * 32, (y + 1) * 32);
 						hitbox.p.addPoint(x * 32, (y + 1) * 32);
 					}
-	
-					lvlImg[i].getGraphics().drawImage(
-							TextureManager.getTexture(charMap[y][x] + ""),
-							x * 32, y * 32, 32, 32, null);
+					
+					
+					if (isAnimated(charMap[y][x])) {
+						String id = new String() + charMap[y][x];
+						id = id + (i+1);
+						img[i].getGraphics().drawImage(
+								TextureManager.getTexture(id),
+								x * 32, y * 32, 32, 32, null);
+					} else {
+						img[i].getGraphics().drawImage(
+								TextureManager.getTexture(charMap[y][x] + ""),
+								x * 32, y * 32, 32, 32, null);
+					}
 				}
 			}
 		}
@@ -66,6 +74,7 @@ public class Level extends Entity {
 
 	@Override
 	public void render(Graphics g) {
+		lvlImg = img[(int) ((System.nanoTime() / 200000000) % 4)];
 		g.drawImage(lvlImg, 0, 0, null);
 		for (Pickup pickup : pickups) {
 			pickup.render(g);
@@ -77,7 +86,11 @@ public class Level extends Entity {
 		return codes.contains("" + c);
 	}
 	
-	private 
+	private boolean isAnimated(char c) {
+		String codes = "B";
+		return codes.contains("" + c);
+	}
+	
 	
 	public ArrayList<Pickup> getPickups(){
 		return(pickups);
