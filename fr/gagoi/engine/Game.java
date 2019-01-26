@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.SliderUI;
-
 import fr.gagoi.engine.entities.IUpdatable;
 import fr.gagoi.engine.graphics.Display;
 import fr.gagoi.engine.graphics.IRenderable;

@@ -35,12 +35,12 @@ public class Loader {
 		y = Integer.parseInt(properties.getProperty("y"));
 	    
 		// TileMap
-	    charMap = new char[x][y];
+	    charMap = new char[y][x];
 	    String mapStr[] = new String[x*y];
 	    mapStr = properties.getProperty("map").split("");
 	    
-	    for (int i = 0; i < x; i++) {
-			for (int j = 0; j < y; j++) {
+	    for (int i = 0; i < y; i++) {
+			for (int j = 0; j < x; j++) {
 				charMap[i][j] = mapStr[i*x + j].charAt(0);
 			}
 		}
@@ -80,23 +80,3 @@ public class Loader {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

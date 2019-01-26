@@ -1,16 +1,25 @@
 package fr.wiyochi.level;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import fr.gagoi.engine.entities.Entity;
+import fr.gagoi.engine.entities.Hitbox;
 import fr.gagoi.engine.graphics.TextureManager;
 
-public class Level {
-	private BufferedImage[] img;
+public class Level extends Entity {
 	
-	public void load(String filename) {
+	BufferedImage backgroundImg, lvlImg;
+	
+	public Level(int lvlId, String fileName) {
+		super("level_" + lvlId);
+		this.load(fileName);
+	}
+	
+	private void load(String filename) {
 		Properties properties = new Properties();
 		FileInputStream input = null;
 
@@ -29,26 +38,35 @@ public class Level {
 		
 		Loader loader = new Loader();
 		loader.loadLevel(filename);
+
 		
 		char[][] charMap = loader.getMap();
-		for (int i = 0; i < loader.getX(); i++) {
-			for (int j = 0; j < loader.getY(); j++) {
-				String path = "resources/textures/" + properties.getProperty("" + charMap[i][j]);
-				switch (charMap[i][j]) {
-				case 'A':
-					TextureManager.loadTexture(path, "" + charMap[i][j]); // Appelle le textureManager avec "resources/textures/air.png" et "A" comme id
-					break;
-				case 'B':
-					TextureManager.loadTexture(path, "" + charMap[i][j]);
-					break;
-				case 'C':
-					TextureManager.loadTexture(path, "" + charMap[i][j]);
-					break;
 
-				default:
-					break;
+		this.lvlImg = new BufferedImage(loader.getX() * 32, loader.getY() * 32, BufferedImage.TYPE_INT_ARGB);
+		
+		hitbox = new Hitbox();
+		
+		for (int y = 0; y < charMap.length; y++) {
+			for (int x = 0; x < charMap[y].length; x++) {
+				if (isHard(charMap[y][x])) {
+					hitbox.p.addPoint(x * 32, y * 32);
+					hitbox.p.addPoint((x + 1) * 32, y * 32);
+					hitbox.p.addPoint((x + 1) * 32, (y + 1) * 32);
+					hitbox.p.addPoint(x * 32, (y + 1) * 32);
 				}
+				
+				lvlImg.getGraphics().drawImage(TextureManager.getTexture(charMap[y][x] + ""), x * 32, y * 32, 32, 32, null);
 			}
 		}
+	}
+	
+	@Override
+	public void render(Graphics g) {
+		g.drawImage(lvlImg, 0, 0, null);
+	}
+	
+	private boolean isHard(char c) {
+		String codes = "A";
+		return codes.contains("" + c);
 	}
 }

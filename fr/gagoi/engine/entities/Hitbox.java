@@ -4,7 +4,11 @@ import java.awt.Polygon;
 
 public class Hitbox {
 
-	private Polygon p;
+	public Polygon p;
+	
+	public Hitbox() {
+		p = new Polygon();
+	}
 
 	public Hitbox(int x, int y, int width, int height) {
 		p = new Polygon();
