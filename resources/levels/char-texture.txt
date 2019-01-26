@@ -7,3 +7,5 @@ E=air
 H=hautdeflute
 F=baseflute
 G=basflute
+R=hautdelempli
+S=basdelampli
