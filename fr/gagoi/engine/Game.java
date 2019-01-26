@@ -8,6 +8,8 @@ import fr.gagoi.engine.entities.IUpdatable;
 import fr.gagoi.engine.graphics.Display;
 import fr.gagoi.engine.graphics.IRenderable;
 
+import fr.gagoi.music.MusicManager;
+
 public class Game implements Runnable {
 
 	private static Game game = null;
@@ -15,12 +17,14 @@ public class Game implements Runnable {
 	private Display window;
 	public static boolean isRunning;
 	private static List<IUpdatable> updatables = new ArrayList<IUpdatable>();
+	private MusicManager music;
 
 	public static void init(String name, Dimension size, int nbLayer) {
 		if (game == null) {
 			game = new Game();
 			game.window = new Display(name, size, nbLayer);
 			game.window.activeRender(true);
+			game.music = new MusicManager();
 		}
 	}
 
