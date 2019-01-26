@@ -21,4 +21,6 @@ public interface IAudio {
 	public Clip GetClip();
 	public void Play();
 	public void Play(String name);
+	public void SetVolume(double v);
+	public double GetVolume();
 }

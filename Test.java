@@ -29,6 +29,7 @@ public class Test {
 		try {
 			m.AddAudio("Mariachis");
 			m.Play("Mariachis");
+			m.SetVolume(0.5);
 		} catch (Exception err) {
 			err.printStackTrace();
 		}
