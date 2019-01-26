@@ -13,6 +13,10 @@ import fr.gagoi.engine.graphics.TextureManager;
 public class Level extends Entity {
 	
 	BufferedImage backgroundImg, lvlImg;
+	int dX = 0;
+	int dY = 0;
+	int dXLimit;
+	int dYLimit;
 	
 	public Level(int lvlId, String fileName) {
 		super("level_" + lvlId);
@@ -39,6 +43,8 @@ public class Level extends Entity {
 		Loader loader = new Loader();
 		loader.loadLevel(filename);
 
+		dXLimit = loader.getX();
+		dYLimit = loader.getY();
 		
 		char[][] charMap = loader.getMap();
 
@@ -62,7 +68,14 @@ public class Level extends Entity {
 	
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(lvlImg, 0, 0, null);
+		g.drawImage(lvlImg, dX, dY, null);
+	}
+	
+	@Override
+	public void translate(int i, int j) {
+		dX += i;
+		dY += j;
+		hitbox.translate(i, j);
 	}
 	
 	private boolean isHard(char c) {

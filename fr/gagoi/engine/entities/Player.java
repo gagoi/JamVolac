@@ -21,9 +21,23 @@ public class Player extends Entity {
 	@Override
 	public void update(List<IUpdatable> map) {
 		if (Keyboard.isKeyPressed[Keyboard.RIGHT])
-			hitbox.translate(vx, 0);
+			if(hitbox.getX() + hitbox.getWidth() > 640) {
+				map.forEach((e) -> {
+					if(!e.equals(this))
+						e.translate(-vx, 0);
+				});
+			} else {
+				hitbox.translate(vx, 0);
+			}
 		if (Keyboard.isKeyPressed[Keyboard.LEFT])
-			hitbox.translate(-vx, 0);
+			if(hitbox.getX() < 640) {
+				map.forEach((e) -> {
+					if(!e.equals(this))
+						e.translate(vx, 0);
+				});
+			} else {
+				hitbox.translate(-vx, 0);
+			}
 		if (Keyboard.isKeyPressed[Keyboard.UP] && !isJumping) {
 			vj = .25f;
 			isJumping = true;

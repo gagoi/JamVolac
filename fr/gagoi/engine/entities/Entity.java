@@ -71,4 +71,9 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 	public String toString() {
 		return super.toString() + String.format("{%s, %d, %d, %d, %d}", getId(), hitbox.getX(), hitbox.getY(), hitbox.getWidth(), hitbox.getHeight());
 	}
+	
+	@Override
+	public void translate(int i, int j) {
+		hitbox.translate(i, j);
+	}
 }

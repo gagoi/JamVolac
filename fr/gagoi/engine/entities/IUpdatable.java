@@ -25,5 +25,7 @@ public interface IUpdatable {
 	 * Renvoie si oui ou non l'objet est cliquable.
 	 */
 	default public boolean canBeClicked() {return false;};
+	
+	default public void translate(int i, int j) { };
 
 }
