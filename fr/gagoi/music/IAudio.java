@@ -10,7 +10,7 @@ import java.io.IOException;
 public interface IAudio {
 	
 	public void AddAudio(String name);
-	public void LoadAudio(int index)
+	public void LoadAudio(String name)
 			throws IOException, UnsupportedAudioFileException, 
 			IndexOutOfBoundsException, LineUnavailableException;
 	public AudioInputStream getAudioStream();
@@ -20,4 +20,5 @@ public interface IAudio {
 	public void CloseClip();
 	public Clip GetClip();
 	public void Play();
+	public void Play(String name);
 }

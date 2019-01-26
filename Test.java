@@ -19,18 +19,16 @@ public class Test {
 		
 		MusicManager m = new MusicManager();
 		try {
-			m.AddAudio("Mariachis.wav");
-			m.LoadAudio(0);
-			m.Play();
+			m.AddAudio("Mariachis");
+			m.Play("Mariachis");
 		} catch (Exception err) {
 			err.printStackTrace();
 		}
 		
 		SoundManager s = new SoundManager();
 		try {
-			s.AddAudio("Chute.wav");
-			s.LoadAudio(0);
-			s.Play();
+			s.AddAudio("Chute");
+			s.Play("Chute");
 		} catch (Exception err) {
 			err.printStackTrace();
 		}		

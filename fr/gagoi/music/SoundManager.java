@@ -2,8 +2,8 @@ package fr.gagoi.music;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -13,29 +13,30 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class SoundManager implements IAudio {
 	
-	private List<File> ListeSound;
+	private Map<String, File> ListeSound;
 	private AudioInputStream SoundStream;
 	private Clip clip;
 	
 	public SoundManager()
 	{
-		ListeSound = new ArrayList<>();
+		ListeSound = new HashMap<>();
 	}
 	
 	@Override
 	public void AddAudio(String name)
 	{
-		File file = new File(System.getenv("resourcesPath") + "/sound/" + name);
-		ListeSound.add(file);
+		File file = new File(System.getenv("resourcesPath") +
+				"/sound/" + name + ".wav");
+		ListeSound.put(name, file);
 	}
 
 	@Override
-	public void LoadAudio(int index)
+	public void LoadAudio(String name)
 			throws IOException, UnsupportedAudioFileException,
 			IndexOutOfBoundsException, LineUnavailableException
 	{
 		try {
-			SoundStream = AudioSystem.getAudioInputStream(ListeSound.get(index));
+			SoundStream = AudioSystem.getAudioInputStream(ListeSound.get(name));
 		} catch (IndexOutOfBoundsException e) {
 			System.out.println("L'index donné est trop grand");
 			throw(e);
@@ -93,5 +94,15 @@ public class SoundManager implements IAudio {
 	public void Play()
 	{
 		clip.start();
+	}
+	
+	public void Play(String name)
+	{
+		try {
+			LoadAudio(name);
+			clip.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
