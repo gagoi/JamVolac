@@ -14,6 +14,8 @@ public class Player extends Entity {
 
 	public Player() {
 		super("player", new Hitbox(100, 500, 32, 64));
+		getSound().AddAudio("jump");
+		getSound().AddAudio("jumpland");
 	}
 
 	@Override
@@ -26,6 +28,7 @@ public class Player extends Entity {
 			vj = .25f;
 			isJumping = true;
 			lastJumpUpdate = System.currentTimeMillis();
+			getSound().Play("jump");
 		}
 
 		if (vj != 0 && isJumping) {
@@ -37,6 +40,7 @@ public class Player extends Entity {
 				vj = 0;
 				hitbox.translate(0, -40);
 				isJumping = false;
+				getSound().Play("jumpland");
 			} else {
 				hitbox.translate(0, (int) -((0.5 * gravity * delta * delta + vy * delta + vj * delta)));
 			}

@@ -8,6 +8,8 @@ import fr.gagoi.engine.IGameElement;
 import fr.gagoi.engine.graphics.IRenderable;
 import fr.gagoi.engine.graphics.TextureManager;
 
+import fr.gagoi.music.SoundManager;
+
 public class Entity extends IGameElement implements IRenderable, IUpdatable {
 
 	protected Hitbox hitbox;
@@ -15,10 +17,13 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 	private int nbSprites;
 	private int vitesse;
 	private BufferedImage[] img;
+	private SoundManager sound;
+	
 	
 	public Entity(String id) {
 		this.id = id;
 		this.nbSprites = 1;
+		sound = new SoundManager();
 	}
 	
 	public Entity(String id, int nbSprites, int vitesse) {
@@ -26,11 +31,13 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 		this.img = new BufferedImage[nbSprites];
 		this.nbSprites = nbSprites;
 		this.vitesse = vitesse;
+		sound = new SoundManager();
 	}
 	
 	public Entity(String id, Hitbox hitbox) {
 		this(id);
 		this.hitbox = hitbox;
+		sound = new SoundManager();
 	}
 
 	@Override
@@ -41,10 +48,15 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 			g.drawImage(img[(int) ((System.nanoTime() / (1000 / vitesse) ) % nbSprites)], hitbox.getX(), hitbox.getY(), null);
 	}
 	
+	public SoundManager getSound() {
+		return this.sound;
+	}
+	
 	@Override
 	public int getLayer() {
 		return 1;
 	}
+	
 
 	@Override
 	public void update(List<IUpdatable> map) {
