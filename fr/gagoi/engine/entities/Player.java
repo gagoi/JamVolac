@@ -1,8 +1,8 @@
 package fr.gagoi.engine.entities;
 
-import java.util.Iterator;
 import java.util.List;
 
+import fr.gagoi.engine.IGameElement;
 import fr.gagoi.engine.inputs.Keyboard;
 
 public class Player extends Entity {
@@ -10,8 +10,9 @@ public class Player extends Entity {
 	private int vx = 4, vy;
 	private float dx, dy, vj;
 	private boolean isJumping;
-	private long lastJumpUpdate;
-	private static double gravity = -0.0028;
+	private long lastUpdate, lastJumpUpdate;
+	// private static double gravity = -0.0028;
+	private static final double gravity = -8.8e4;
 
 	public Player() {
 		super("player", new Hitbox(100, 300, 32, 64));
@@ -21,42 +22,39 @@ public class Player extends Entity {
 
 	@Override
 	public void update(List<IUpdatable> map) {
+		if (lastUpdate == 0)
+			lastUpdate = System.currentTimeMillis();
+		if (lastJumpUpdate == 0)
+			lastJumpUpdate = System.currentTimeMillis();
 		dx = 0;
 		dy = 0;
+		double delta = (System.currentTimeMillis() / 1000.0 - lastUpdate / 1000.0);
+		double deltaJmp = (System.currentTimeMillis() / 1000.0 - lastUpdate / 1000.0);
+		
+		deltaJmp /= 1.5;
+		
 		if (Keyboard.isKeyPressed[Keyboard.RIGHT])
 			dx = vx;
-			hitbox.translate(vx, 0);
+		hitbox.translate(vx, 0);
 		if (Keyboard.isKeyPressed[Keyboard.LEFT])
 			dx = -vx;
-			hitbox.translate(-vx, 0);
+		hitbox.translate(-vx, 0);
 		if (Keyboard.isKeyPressed[Keyboard.UP] && !isJumping) {
-			vj = .25f;
+			System.out.println("JUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUMPPPPPPPPPPPPPPPPPPPP");
+			vj = 2500;
 			isJumping = true;
-			lastJumpUpdate = System.currentTimeMillis();
-			getSound().Play("jump");
+			//getSound().Play("jump");
 		}
-		
-		if (vj != 0 && isJumping) {
-			long delta = System.currentTimeMillis() - lastJumpUpdate;
-			delta /= 1.5;
 
-			vy += vy > vj * 2 ? gravity * delta + vj : vy;
-			if (hitbox.getY() + hitbox.getHeight() >= 650 + 10) {
-				vj = 0;
-				dy = -40;
-				isJumping = false;
-				getSound().Play("jumpland");
-			} else {
-				dy = (int) -((0.5 * gravity * delta * delta + vy * delta + vj * delta));
-			}
-		}
+		dy = (float) -((0.5 * gravity * delta * delta + vy * delta + vj * deltaJmp));
+
+		if(isJumping)
+				vj-=40;
+		
 		for (IUpdatable obj : map) {
-			if((obj.hasInGameHitbox()) && (hitbox.collide(obj.getHitbox()))) {
-				
-				if(obj!=this) {
-					System.out.println("Collision avec " + obj.toString());
-					if(obj instanceof Pickup) {
-						System.out.println("Pickup récuperé");
+			if ((obj.hasInGameHitbox()) && (hitbox.collide(obj.getHitbox()))) {
+				if (obj != this) {
+					if (obj instanceof Pickup) {
 						map.remove(obj);
 					} else {
 						PlatformColliding(obj);
@@ -64,29 +62,41 @@ public class Player extends Entity {
 				}
 			}
 		}
-		System.out.println("");
-		System.out.println("dx = "+dx+" ,dy = "+dy);
-		hitbox.translate((int)dx,(int)dy);
 
+		hitbox.translate((int) dx, (int) dy);
+		lastUpdate = System.currentTimeMillis();
 	}
-	
+
 	protected void PlatformColliding(IUpdatable obj) {
 		int loc = hitbox.whereCollision(obj.getHitbox(), dx, dy);
-		
-		switch(loc){
-		case(1) : dx=-dx;
+		//System.out.println("Collision avec : " + ((IGameElement) obj).getId() + " par le " + loc);
+		switch (loc) {
+		case (1):
+			dx = -dx;
 			break;
-		case(2): if(isJumping && dy>0) {
-				dy=0;
-				isJumping=false;
+		case (2):
+			if (dy > 0)
+			{
+				dy = 0;
+				if(isJumping)
+					isJumping = false;
 			}
+			// dy = -(hitbox.getY() + obj.getHitbox().getY() - hitbox.getHeight());
+			/*
+			 * if (isJumping && dy > 0) { dy = -hitbox.getY() + obj.getHitbox().getY() -
+			 * hitbox.getHeight(); isJumping = false; }
+			 */
 			break;
-		case(3): dx=-dx;
+		case (3):
+			dx = -dx;
 			break;
-		case(4): dy=-dy;
+		case (4):
+			dy = dy;
+			vy = 0;
 			break;
-		default : break;
+		default:
+			break;
 		}
-		System.out.println("Localisation = "+loc);
+		//System.out.println("Localisation = " + loc);
 	}
 }

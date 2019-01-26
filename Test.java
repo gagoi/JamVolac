@@ -1,4 +1,6 @@
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -22,9 +24,24 @@ public class Test {
 		Player e = new Player();
 
 		Game.start();
+		
 		//Game.addElement(l);
-		Game.addElement(new Entity("platform1", new Hitbox(0, 500, 3000, 100)));
-		Game.addElement(new Entity("platform2", new Hitbox(400, 400, 100, 150)));
+		Game.addElement(new Entity("platform1", new Hitbox(0, 500, 3000, 100)) {
+			@Override
+			public void render(Graphics g) {
+				super.render(g);
+				g.setColor(Color.BLUE);
+				g.fillRect(0, 500, 3000, 100);
+			}
+		});
+		Game.addElement(new Entity("platform2", new Hitbox(400, 400, 100, 150)){
+			@Override
+			public void render(Graphics g) {
+				super.render(g);
+				g.setColor(Color.RED);
+				g.fillRect(400, 400, 100, 150);
+			}
+		});
 		Game.addElement(e);
 			
 	}
