@@ -59,7 +59,7 @@ public class Loader {
 	    	System.out.println("Name: " + namePickups[i]);
 	    	System.out.println("Pos: " + posPickups[0] + "," + posPickups[1]);
 	    	
-	    	pickups.put(namePickups[i], posPickups);
+	    	pickups.put(namePickups[i], posPickups.clone());
 		}
 	}
 	

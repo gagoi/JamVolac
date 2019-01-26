@@ -1,5 +1,6 @@
 package fr.gagoi.engine.entities;
 
+import java.util.Iterator;
 import java.util.List;
 
 import fr.gagoi.engine.inputs.Keyboard;
@@ -29,6 +30,12 @@ public class Player extends Entity {
 			isJumping = true;
 			lastJumpUpdate = System.currentTimeMillis();
 			getSound().Play("jump");
+		}
+		
+		for (IUpdatable obj : map) {
+			if(obj.hasInGameHitbox()) {
+				// TODO: Collisions?
+			}
 		}
 
 		if (vj != 0 && isJumping) {
