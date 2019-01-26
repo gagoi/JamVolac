@@ -47,7 +47,7 @@ public class Loader {
 	    
 	    
 	    // Pickups
-	    pickups = new HashMap<String, Integer[]>()
+	    pickups = new HashMap<String, Integer[]>();
 	    String[] namePickups = properties.getProperty("pickups").split(",");
 	    String[] strPosPickUp;
 	    Integer[] posPickups = new Integer[2];

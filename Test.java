@@ -1,10 +1,8 @@
 import java.awt.Dimension;
-import java.io.File;
 
 import fr.gagoi.engine.Game;
 import fr.gagoi.engine.entities.Player;
 import fr.gagoi.engine.graphics.TextureManager;
-import fr.wiyochi.level.Loader;
 
 public class Test {
 
