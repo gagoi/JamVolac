@@ -1,6 +1,8 @@
 package fr.gagoi.engine;
 
 import java.awt.Dimension;
+import java.awt.event.WindowEvent;
+import java.lang.Thread.State;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,19 +10,30 @@ import fr.gagoi.engine.entities.IUpdatable;
 import fr.gagoi.engine.graphics.Display;
 import fr.gagoi.engine.graphics.IRenderable;
 
+import fr.gagoi.music.MusicManager;
+
 public class Game implements Runnable {
 
+	public static final int STATE_MENU = 0;
+	public static final int STATE_LVL1 = 1;
+	public static final int STATE_LVL2 = 2;
+	public static final int STATE_LVL3 = 3;
+	public static final int STATE_LVL4 = 4;
+
+	private static int GAME_STATE = -1;
 	private static Game game = null;
 
 	private Display window;
 	public static boolean isRunning;
 	private static List<IUpdatable> updatables = new ArrayList<IUpdatable>();
+	private MusicManager music;
 
 	public static void init(String name, Dimension size, int nbLayer) {
 		if (game == null) {
 			game = new Game();
 			game.window = new Display(name, size, nbLayer);
 			game.window.activeRender(true);
+			game.music = new MusicManager();
 		}
 	}
 
@@ -54,7 +67,7 @@ public class Game implements Runnable {
 		long startTimer = System.currentTimeMillis();
 		long actualTimer = startTimer;
 		long fpsTimer = startTimer;
-		float updateTime = 1000/120;
+		float updateTime = 1000 / 120;
 		int fps = 0;
 
 		while (isRunning) {
@@ -77,6 +90,113 @@ public class Game implements Runnable {
 				fps = 0;
 				fpsTimer = System.currentTimeMillis();
 			}
+		}
+	}
+
+	public MusicManager getMusic() {
+		return this.music;
+	}
+	
+	private static void disable(String id) {
+		System.out.println("Disabling " + id);
+		for (IUpdatable iUpdatable : updatables) {
+			if (((IGameElement) iUpdatable).getId().equals(id)) {
+				iUpdatable.setActive(false);
+			}
+		}
+		
+		for (IRenderable iRenderable : game.window.getElements()) {
+			if (((IGameElement) iRenderable).getId().equals(id)) {
+				iRenderable.setActiveRender(false);
+				System.out.println(iRenderable.needRender());
+			}
+		}
+	}
+	
+	private static void enable(String id) {
+		System.out.println("Enabling " + id);
+		for (IUpdatable iUpdatable : updatables) {
+			if (((IGameElement) iUpdatable).getId().equals(id)) {
+				iUpdatable.setActive(true);
+				break;
+			}
+		}
+		
+		for (IRenderable iRenderable : game.window.getElements()) {
+			if (((IGameElement) iRenderable).getId().equals(id)) {
+				iRenderable.setActiveRender(true);
+				break;
+			}
+		}
+	}
+
+	public static void setGameState(int newGameState) {
+		if (GAME_STATE != newGameState && newGameState >= STATE_MENU && newGameState <= STATE_LVL4) {
+			game.window.activeRender(false);
+			GAME_STATE = newGameState;
+			switch (GAME_STATE) {
+			case STATE_MENU:
+				disable("level_1");
+				disable("level_2");
+				disable("level_3");
+				disable("level_4");
+				disable("player");
+				enable("button_1");
+				enable("button_2");
+				enable("button_3");
+				enable("button_4");
+				break;
+			case STATE_LVL1:
+				enable("level_1");
+				disable("level_2");
+				disable("level_3");
+				disable("level_4");
+				enable("player");
+				disable("button_1");
+				disable("button_2");
+				disable("button_3");
+				disable("button_4");
+
+				break;
+			case STATE_LVL2:
+				disable("level_1");
+				enable("level_2");
+				disable("level_3");
+				disable("level_4");
+				enable("player");
+				disable("button_1");
+				disable("button_2");
+				disable("button_3");
+				disable("button_4");
+
+				break;
+			case STATE_LVL3:
+				disable("level_1");
+				disable("level_2");
+				disable("level_3");
+				enable("level_4");
+				enable("player");
+				disable("button_1");
+				disable("button_2");
+				disable("button_3");
+				disable("button_4");
+
+				break;
+			case STATE_LVL4:
+				disable("level_1");
+				disable("level_2");
+				disable("level_3");
+				enable("level_4");
+				enable("player");
+				disable("button_1");
+				disable("button_2");
+				disable("button_3");
+				disable("button_4");
+
+				break;
+			}
+
+			game.window.activeRender(true);
 		}
 	}
 }

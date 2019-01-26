@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel {
 
 	private BufferedImage[] img;
-	private boolean needRender =true;
+	private boolean needRender = true;
 	protected List<IRenderable> renderables;
 	private Dimension size;
 	private int nbLayers;
@@ -25,12 +25,12 @@ public class GamePanel extends JPanel {
 		for (int i = 0; i < nbLayers + 1; ++i)
 			img[i] = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
-		if(needRender)
+		if (needRender)
 			render(g);
-			
+
 	}
 
 	private void clear() {
@@ -38,13 +38,15 @@ public class GamePanel extends JPanel {
 			bufferedImage.getGraphics().clearRect(0, 0, size.width, size.height);
 		}
 	}
+
 	
 	public void render(Graphics g) {
 		clear();
 		for (IRenderable rend : renderables) {
-			rend.render(img[rend.getLayer()].getGraphics());
+			if (rend.needRender())
+				rend.render(img[rend.getLayer()].getGraphics());
 		}
-		
+
 		for (int i = 0; i < nbLayers; i++) {
 			img[nbLayers].getGraphics().drawImage(img[i], 0, 0, null);
 		}
