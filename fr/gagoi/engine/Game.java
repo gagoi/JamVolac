@@ -83,4 +83,8 @@ public class Game implements Runnable {
 			}
 		}
 	}
+	
+	public MusicManager getMusic() {
+		return this.music;
+	}
 }

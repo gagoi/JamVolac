@@ -48,10 +48,15 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 			g.drawImage(img[(int) ((System.nanoTime() / (1000 / vitesse) ) % nbSprites)], hitbox.getX(), hitbox.getY(), null);
 	}
 	
+	public SoundManager getSound() {
+		return this.sound;
+	}
+	
 	@Override
 	public int getLayer() {
 		return 1;
 	}
+	
 
 	@Override
 	public void update(List<IUpdatable> map) {
