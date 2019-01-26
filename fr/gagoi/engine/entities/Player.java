@@ -20,6 +20,31 @@ public class Player extends Entity {
 
 	@Override
 	public void update(List<IUpdatable> map) {
+		if (Keyboard.isKeyPressed[Keyboard.RIGHT]) {
+			map.forEach((e) -> {
+			if(!e.equals(this))
+				e.translate(-vx, 0);
+			});
+		}
+		if (Keyboard.isKeyPressed[Keyboard.LEFT]) {
+			map.forEach((e) -> {
+			if(!e.equals(this))
+				e.translate(vx, 0);
+			});
+		}
+		if (Keyboard.isKeyPressed[Keyboard.UP]) {
+			map.forEach((e) -> {
+			if(!e.equals(this))
+				e.translate(0, vx);
+			});
+		}
+		if (Keyboard.isKeyPressed[Keyboard.DOWN]) {
+			map.forEach((e) -> {
+			if(!e.equals(this))
+				e.translate(0, -vx);
+			});
+		}
+		/*
 		if (Keyboard.isKeyPressed[Keyboard.RIGHT])
 			if(hitbox.getX() + hitbox.getWidth() > 640) {
 				map.forEach((e) -> {
@@ -59,6 +84,7 @@ public class Player extends Entity {
 				hitbox.translate(0, (int) -((0.5 * gravity * delta * delta + vy * delta + vj * delta)));
 			}
 		}
+		*/
 
 	}
 }

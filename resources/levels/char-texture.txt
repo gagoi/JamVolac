@@ -1,4 +1,9 @@
-A=air
+.=blanc
 B=basepartition
 C=finpartitiondroite
 D=finpartitiongauche
+O=air
+E=air
+H=hautdeflute
+F=baseflute
+G=basflute
