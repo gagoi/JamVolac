@@ -34,7 +34,11 @@ public class Player extends Entity {
 		
 		for (IUpdatable obj : map) {
 			if(obj.hasInGameHitbox()) {
-				// TODO: Collisions?
+				if(obj instanceof Pickup) {
+					map.remove(obj);
+				} else {
+					
+				}
 			}
 		}
 
