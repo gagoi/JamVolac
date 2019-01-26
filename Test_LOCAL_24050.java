@@ -13,15 +13,10 @@ public class Test {
 	public static void main(String[] args) {
 		Game.init("TEST", new Dimension(1280, 720), 2);
 		
-<<<<<<< HEAD
 		loadTextures();
 		TextureManager.loadTexture("player", "player");
 
 		Level l = new Level(0, System.getenv("resourcesPath") + "/levels/test.txt");
-=======
-		TextureManager.loadTexture("player1", "player");
-		
->>>>>>> 13b4b0b2b09cbf28dc4307514e962016ed067e03
 		Player e = new Player();
 		
 		
