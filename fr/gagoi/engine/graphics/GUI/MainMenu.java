@@ -12,7 +12,7 @@ public class MainMenu {
 
 	public MainMenu() {
 		buttons = new EButton[4];
-		levels = new Level[4];
+		levels = new Level[1];
 
 		for (int i = 0; i < levels.length; i++) {
 			levels[i] = new Level(i+1, System.getenv("resourcesPath") + "/levels/level" + (i + 1));

@@ -10,7 +10,8 @@ import javax.imageio.ImageIO;
 
 public class TextureManager {
 
-	private static HashMap<String, BufferedImage> textures = new HashMap<String, BufferedImage>();
+	private static HashMap<String, BufferedImage> textures =
+			new HashMap<String, BufferedImage>();
 	
 	public static void loadTexture(String path, String id) {
 		if (!textures.containsKey(id)) {
