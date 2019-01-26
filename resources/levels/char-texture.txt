@@ -1,3 +1,4 @@
 A=air
-B=sol
-C=yolo
+B=basepartition
+C=finpartitiondroite
+D=finpartitiongauche
