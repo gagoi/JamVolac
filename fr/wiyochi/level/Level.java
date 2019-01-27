@@ -44,8 +44,6 @@ public class Level extends Entity {
 			for (int x = 0; x < charMap[y].length; x++) {
 				String id = new String() + charMap[y][x];
 				Block b = new Block(id, 2, 4, new Hitbox(x * 32, y * 32, 32, 32));
-				if (b.getHitbox().getX() < 500 && b.getHitbox().getY() < 500)
-					System.out.println(b.getHitbox());
 				b.setActiveRender(false);
 				blocks.add(b);
 				if (isAnimated(charMap[y][x]))
@@ -55,9 +53,9 @@ public class Level extends Entity {
 		}
 		this.img = new BufferedImage[4];
 
-		for (int i = 0; i < 4; i++) {
+		/*for (int i = 0; i < 4; i++) {
 			this.img[i] = new BufferedImage(loader.getX() * 32, loader.getY() * 32, BufferedImage.TYPE_INT_ARGB);
-		}
+		}*/
 	}
 
 	@Override
