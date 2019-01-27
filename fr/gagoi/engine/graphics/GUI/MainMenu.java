@@ -9,11 +9,13 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import fr.gagoi.engine.Game;
+import fr.gagoi.engine.IGameElement;
 import fr.gagoi.engine.graphics.IRenderable;
 import fr.gagoi.engine.graphics.TextureManager;
 import fr.wiyochi.level.Level;
 
-public class MainMenu implements IRenderable{
+public class MainMenu extends IGameElement implements IRenderable{
+	private String id;
 	private EButton[] buttons;
 	private Level[] levels;
 	
@@ -25,7 +27,7 @@ public class MainMenu implements IRenderable{
 			{ { 0, 443, 443, 0 }, { 495, 495, 719, 719 } } };
 
 	public MainMenu() {
-		
+		id = "menu";
 		TextureManager.loadTexture("ImageMenu", "menu");
 		
 		buttons = new EButton[4];
@@ -43,11 +45,12 @@ public class MainMenu implements IRenderable{
 					new Polygon(butpos[i][0], butpos[i][1], butpos[i][0].length),
 					i+1) {
 				@Override
-				public void action(int lvl) {
-					Game.setGameState(Game.STATE_LVL1 + lvl);
+				public void action() {
+					Game.setGameState(Game.STATE_LVL1 + j);
 				}
 
 			};
+			Game.addMouse(buttons[i]);
 			Game.addElement(buttons[i]);
 		}
 
@@ -71,6 +74,11 @@ public class MainMenu implements IRenderable{
 	@Override
 	public boolean needRender() {
 		return activ;
+	}
+
+	@Override
+	public String getId() {
+		return this.id;
 	}
 	
 	

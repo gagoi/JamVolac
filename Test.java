@@ -18,9 +18,9 @@ public class Test {
 		
 		MainMenu menu = new MainMenu();
 		Game.rmBackGround();
+		Game.addElement(menu);
 		Game.setGameState(Game.STATE_MENU);
 		
-		Game.addElement(menu);
 		Game.start();
 	}
 

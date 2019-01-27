@@ -17,9 +17,9 @@ public abstract class EButton extends EGuiElement  implements MouseListener {
 
 	private boolean needRender = true;
 	private boolean isActive = true;
-	private int level;
-	Polygon p;
 	BufferedImage im;
+	Color c = Color.RED;
+	int level;
 
 	public EButton(String id, Polygon p, int lvl) {
 		super(id, p);
@@ -27,12 +27,18 @@ public abstract class EButton extends EGuiElement  implements MouseListener {
 		level = lvl;
 	}
 
-	public abstract void action(int lvl);
+	public abstract void action();
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (getHitbox().contains(e.getPoint()))
-			action(level);
+		System.out.println("Clic");
+		if (getHitbox().contains(e.getPoint())) {
+			c = Color.BLUE;
+			System.out.println("Chargement du niveau "+level);
+			action();
+		} else {
+			c = Color.RED;
+		}
 	}
 
 	@Override
@@ -49,13 +55,12 @@ public abstract class EButton extends EGuiElement  implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-
 	}
 	
 	@Override
 	public void render(Graphics g) {
 		if(needRender) {
-			g.setColor(Color.BLUE);
+			g.setColor(c);
 			g.fillPolygon(getHitbox());
 		}
 	}

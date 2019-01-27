@@ -2,6 +2,7 @@ package fr.gagoi.engine;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +101,10 @@ public class Game implements Runnable {
 		}
 	}
 	
+	public static void addMouse(MouseListener m) {
+		game.window.addMouseListener(m);
+	}
+	
 	@Override
 	public void run() {
 		isRunning = true;
@@ -141,14 +146,13 @@ public class Game implements Runnable {
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(id)) {
 				iUpdatable.setActive(false);
-				System.out.println("Disabling " + id);
 			}
 		}
 		
 		for (IRenderable iRenderable : game.window.getElements()) {
 			if (((IGameElement) iRenderable).getId().equals(id)) {
 				iRenderable.setActiveRender(false);
-				System.out.println(iRenderable.needRender());
+				System.out.println("Disabling " + id);
 			}
 		}
 	}
@@ -157,7 +161,6 @@ public class Game implements Runnable {
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(id)) {
 				iUpdatable.setActive(true);
-				System.out.println("Enabling " + id);
 				break;
 			}
 		}
@@ -165,6 +168,7 @@ public class Game implements Runnable {
 		for (IRenderable iRenderable : game.window.getElements()) {
 			if (((IGameElement) iRenderable).getId().equals(id)) {
 				iRenderable.setActiveRender(true);
+				System.out.println("Enabling " + id);
 				break;
 			}
 		}
