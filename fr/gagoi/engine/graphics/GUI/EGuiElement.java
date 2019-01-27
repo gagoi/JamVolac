@@ -35,4 +35,8 @@ public abstract class EGuiElement extends IGameElement implements IRenderable {
 	public int getLayer() {
 		return 0;
 	}
+	
+	public Polygon getHitbox() {
+		return hitbox;
+	}
 }

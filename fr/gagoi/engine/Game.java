@@ -2,6 +2,7 @@ package fr.gagoi.engine;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +71,7 @@ public class Game implements Runnable {
 	
 	private static void addBackGround(String name) {
 		BackGround bg = new BackGround(name);
+		System.out.println("Chargement fond");
 		game.window.getElements().add((IRenderable) bg);
 	}
 	
@@ -135,13 +137,16 @@ public class Game implements Runnable {
 			}
 		}
 	}
+	
+	public static void addMouse(MouseListener m) {
+		game.window.addMouseListener(m);
+	}
 
 	public MusicManager getMusic() {
 		return this.music;
 	}
 	
 	private static void disable(String id) {
-		System.out.println("Disabling " + id);
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(id)) {
 				iUpdatable.setActive(false);
@@ -151,16 +156,16 @@ public class Game implements Runnable {
 		for (IRenderable iRenderable : game.window.getElements()) {
 			if (((IGameElement) iRenderable).getId().equals(id)) {
 				iRenderable.setActiveRender(false);
-				System.out.println(iRenderable.needRender());
+				System.out.println("Disabling " + id);
 			}
 		}
 	}
 	
 	private static void enable(String id) {
-		System.out.println("Enabling " + id);
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(id)) {
 				iUpdatable.setActive(true);
+				System.out.println("Enabling " + id);
 				break;
 			}
 		}
@@ -168,6 +173,7 @@ public class Game implements Runnable {
 		for (IRenderable iRenderable : game.window.getElements()) {
 			if (((IGameElement) iRenderable).getId().equals(id)) {
 				iRenderable.setActiveRender(true);
+				System.out.println("Enabling " + id);
 				break;
 			}
 		}
@@ -179,6 +185,7 @@ public class Game implements Runnable {
 			GAME_STATE = newGameState;
 			switch (GAME_STATE) {
 			case STATE_MENU:
+				enable("menu");
 				disable("level_1");
 				disable("level_2");
 				disable("level_3");
@@ -188,10 +195,11 @@ public class Game implements Runnable {
 				enable("button_2");
 				enable("button_3");
 				enable("button_4");
+				//Game.addBackGround("ImageMenu");
 				unloadPickups();
-				addBackGround("ImageMenu");
 				break;
 			case STATE_LVL1:
+				disable("menu");
 				enable("level_1");
 				disable("level_2");
 				disable("level_3");
@@ -206,6 +214,7 @@ public class Game implements Runnable {
 				addBackGround("fondblanc");
 				break;
 			case STATE_LVL2:
+				disable("menu");
 				disable("level_1");
 				enable("level_2");
 				disable("level_3");
@@ -219,6 +228,7 @@ public class Game implements Runnable {
 				loadPickups("level_2");
 				break;
 			case STATE_LVL3:
+				disable("menu");
 				disable("level_1");
 				disable("level_2");
 				disable("level_3");
@@ -232,6 +242,7 @@ public class Game implements Runnable {
 				loadPickups("level_3");
 				break;
 			case STATE_LVL4:
+				disable("menu");
 				disable("level_1");
 				disable("level_2");
 				disable("level_3");

@@ -93,7 +93,7 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 			try {
 				img[i] = ImageIO.read(file);
 			} catch (IOException e) {
-				System.out.print("Problème d'ouverture");
+				System.out.print("Problï¿½me d'ouverture");
 				e.printStackTrace();
 			}
 		}
