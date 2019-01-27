@@ -51,16 +51,19 @@ public class Game implements Runnable {
 		if (element instanceof IUpdatable) {
 			if (!updatables.contains((IUpdatable) element)) {
 				updatables.add((IUpdatable) element);
-			} else {
-				System.out.println(String.format("UPDATE : ID already used when adding : ", element.toString()));
-			}
+			} 
+//			else {
+//				System.out.println(String.format("UPDATE : ID already used when adding : ", element.toString()));
+//			}
 		}
 
 		if (element instanceof IRenderable) {
 			if (!game.window.getElements().contains((IRenderable) element)) {
 				game.window.getElements().add((IRenderable) element);
-			} else {
-				System.out.println(String.format("RENDER : ID already used when adding : ", element.toString()));
+//			} else {
+//				System.out.println(String.format(
+//				"RENDER : ID already used when adding : ", element.toString()));
+//			}
 			}
 		}
 	}

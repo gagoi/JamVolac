@@ -15,19 +15,12 @@ public class Test {
 		Game.init("TEST", new Dimension(1280, 720), 2);
 
 		loadTextures();
-
-		Game.addElement(bg);
-		Game.addElement(l);
-		Game.addElement(e);
-		
-		
 		
 		MainMenu menu = new MainMenu();
 		Game.rmBackGround();
 		Game.setGameState(Game.STATE_MENU);
 		
 		
-		Game.addElement(e);
 		Game.addElement(menu);
 		Game.start();
 	}
