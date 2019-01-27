@@ -3,7 +3,6 @@ package fr.gagoi.engine.entities;
 import java.util.List;
 
 import fr.gagoi.engine.Game;
-import fr.gagoi.engine.IGameElement;
 import fr.gagoi.engine.inputs.Keyboard;
 
 public class Player extends Entity {
@@ -11,11 +10,7 @@ public class Player extends Entity {
 	private int vx = 4;
 	private float vy = 4;
 
-	private int jmp;
-
 	private float dx, dy;
-	private static final double gravity = -8.8e4;
-	private long temps;
 
 	public Player() {
 		super("player", new Hitbox(300, 390, 32, 64));

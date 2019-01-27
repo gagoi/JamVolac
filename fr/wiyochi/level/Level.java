@@ -8,7 +8,6 @@ import java.util.HashMap;
 import fr.gagoi.engine.entities.Entity;
 import fr.gagoi.engine.entities.Hitbox;
 import fr.gagoi.engine.entities.Pickup;
-import fr.gagoi.engine.graphics.TextureManager;
 
 public class Level extends Entity {
 	
