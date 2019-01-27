@@ -43,9 +43,9 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 	@Override
 	public void render(Graphics g) {
 		if (nbSprites == 1) 
-			g.drawImage(TextureManager.getTexture(getId()), hitbox.getX(), hitbox.getY(), hitbox.getWidth(), hitbox.getHeight(), null);
+			g.drawImage(TextureManager.getTexture(getId()), (int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(),(int) hitbox.getHeight(), null);
 		if (nbSprites > 1)
-			g.drawImage(img[(int) ((System.nanoTime() / (1000 / vitesse) ) % nbSprites)], hitbox.getX(), hitbox.getY(), null);
+			g.drawImage(img[(int) ((System.nanoTime() / (1000 / vitesse) ) % nbSprites)], (int)hitbox.getX(), (int)hitbox.getY(), null);
 	}
 	
 	public SoundManager getSound() {
@@ -56,6 +56,7 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 	public int getLayer() {
 		return 1;
 	}
+
 	
 
 	@Override

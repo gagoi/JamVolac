@@ -4,16 +4,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Keyboard implements KeyListener {
-	
+
 	public static int UP = 0;
 	public static int LEFT = 1;
 	public static int RIGHT = 2;
-	
-	public static boolean[] isKeyPressed = new boolean[3];
+	public static int DOWN = 3;
+
+	public static boolean[] isKeyPressed = new boolean[4];
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+
 	}
 
 	@Override
@@ -28,6 +29,9 @@ public class Keyboard implements KeyListener {
 			break;
 		case KeyEvent.VK_RIGHT:
 			isKeyPressed[RIGHT] = true;
+			break;
+		case KeyEvent.VK_DOWN:
+			isKeyPressed[DOWN] = true;
 			break;
 		}
 	}
@@ -44,6 +48,9 @@ public class Keyboard implements KeyListener {
 			break;
 		case KeyEvent.VK_RIGHT:
 			isKeyPressed[RIGHT] = false;
+			break;
+		case KeyEvent.VK_DOWN:
+			isKeyPressed[DOWN] = false;
 			break;
 		}
 	}

@@ -39,11 +39,12 @@ public class Level extends Entity {
 
 		this.lvlImg = new BufferedImage(loader.getX() * 32, loader.getY() * 32, BufferedImage.TYPE_INT_ARGB);
 		
-		hitbox = new Hitbox();
-		
+		//hitbox = new Hitbox();
+		/*
 		for (int y = 0; y < charMap.length; y++) {
 			for (int x = 0; x < charMap[y].length; x++) {
 				if (isHard(charMap[y][x])) {
+					
 					hitbox.p.addPoint(x * 32, y * 32);
 					hitbox.p.addPoint((x + 1) * 32, y * 32);
 					hitbox.p.addPoint((x + 1) * 32, (y + 1) * 32);
@@ -53,6 +54,7 @@ public class Level extends Entity {
 				lvlImg.getGraphics().drawImage(TextureManager.getTexture(charMap[y][x] + ""), x * 32, y * 32, 32, 32, null);
 			}
 		}
+		*/
 	}
 	
 	@Override

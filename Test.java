@@ -24,20 +24,20 @@ public class Test {
 		Game.start();
 		
 		//Game.addElement(l);
-		Game.addElement(new Entity("platform1", new Hitbox(0, 500, 3000, 100)) {
+		Game.addElement(new Entity("platform1", new Hitbox(250, 100, 100, 200)) {
 			@Override
 			public void render(Graphics g) {
 				super.render(g);
 				g.setColor(Color.BLUE);
-				g.fillRect(0, 500, 3000, 100);
+				g.fillRect(250, 100, 100, 200);
 			}
 		});
-		Game.addElement(new Entity("platform2", new Hitbox(400, 100, 100, 2000)){
+		Game.addElement(new Entity("platform2", new Hitbox(250, 500, 100, 200)){
 			@Override
 			public void render(Graphics g) {
 				super.render(g);
 				g.setColor(Color.RED);
-				g.fillRect(400, 400, 100, 150);
+				g.fillRect(250, 500, 100, 200);
 			}
 		});
 		Game.addElement(e);

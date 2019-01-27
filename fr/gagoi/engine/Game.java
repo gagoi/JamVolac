@@ -12,11 +12,11 @@ import fr.gagoi.music.MusicManager;
 
 public class Game implements Runnable {
 
-	private static Game game = null;
+	public static Game game = null;
 
 	private Display window;
 	public static boolean isRunning;
-	private static List<IUpdatable> updatables = new ArrayList<IUpdatable>();
+	public static List<IUpdatable> updatables = new ArrayList<IUpdatable>();
 	private MusicManager music;
 
 	public static void init(String name, Dimension size, int nbLayer) {
