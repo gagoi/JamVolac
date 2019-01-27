@@ -33,6 +33,7 @@ public class Test {
 		
 		
 		MainMenu menu = new MainMenu();
+		Game.rmBackGround();
 		Game.setGameState(Game.STATE_MENU);
 		
 		Game.start();
