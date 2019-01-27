@@ -67,9 +67,10 @@ public class Player extends Entity {
 		boolean ilyenaune = false;
 
 		for (IUpdatable el : Game.updatables) {
-			if (el.hasInGameHitbox() && el != this)
+			if (el.hasInGameHitbox() && el != this) {
 				ilyenaune = ilyenaune || (el.getHitbox().contain(hitbox.x, hitbox.y + hitbox.h + 4)
 						|| el.getHitbox().contain(hitbox.x + hitbox.w, hitbox.y + hitbox.h + 4));
+			}
 			if (ilyenaune)
 				break;
 		}

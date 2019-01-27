@@ -68,6 +68,7 @@ public class Game implements Runnable {
 	
 	private static void addBackGround(String name) {
 		BackGround bg = new BackGround(name);
+		System.out.println("Chargement fond");
 		game.window.getElements().add((IRenderable) bg);
 	}
 	
@@ -161,6 +162,7 @@ public class Game implements Runnable {
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(id)) {
 				iUpdatable.setActive(true);
+				System.out.println("Enabling " + id);
 				break;
 			}
 		}
@@ -190,6 +192,7 @@ public class Game implements Runnable {
 				enable("button_2");
 				enable("button_3");
 				enable("button_4");
+				//Game.addBackGround("ImageMenu");
 				unloadPickups();
 				break;
 			case STATE_LVL1:
