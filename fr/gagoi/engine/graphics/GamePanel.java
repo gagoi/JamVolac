@@ -37,7 +37,7 @@ public class GamePanel extends JPanel {
 
 	private void clear() {
 		for (BufferedImage bufferedImage : img) {
-			bufferedImage.getGraphics().clearRect(0, 0, size.width, size.height);
+			bufferedImage = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
 		}
 	}
 

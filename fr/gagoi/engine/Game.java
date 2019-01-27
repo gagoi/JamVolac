@@ -2,6 +2,7 @@ package fr.gagoi.engine;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import fr.gagoi.engine.entities.Pickup;
 import fr.gagoi.engine.graphics.BackGround;
 import fr.gagoi.engine.graphics.Display;
 import fr.gagoi.engine.graphics.IRenderable;
+import fr.gagoi.engine.graphics.GUI.MainMenu;
 import fr.gagoi.music.MusicManager;
 import fr.wiyochi.level.Level;
 
@@ -23,7 +25,7 @@ public class Game implements Runnable {
 	public static final int STATE_LVL3 = 3;
 	public static final int STATE_LVL4 = 4;
 
-	private static int GAME_STATE = -1;
+	public static int GAME_STATE = -1;
 	
 	public static Game game = null;
 	private Display window;
@@ -51,22 +53,26 @@ public class Game implements Runnable {
 		if (element instanceof IUpdatable) {
 			if (!updatables.contains((IUpdatable) element)) {
 				updatables.add((IUpdatable) element);
-			} else {
-				System.out.println(String.format("UPDATE : ID already used when adding : ", element.toString()));
-			}
+			} 
+//			else {
+//				System.out.println(String.format("UPDATE : ID already used when adding : ", element.toString()));
+//			}
 		}
 
 		if (element instanceof IRenderable) {
 			if (!game.window.getElements().contains((IRenderable) element)) {
 				game.window.getElements().add((IRenderable) element);
-			} else {
-				System.out.println(String.format("RENDER : ID already used when adding : ", element.toString()));
+//			} else {
+//				System.out.println(String.format(
+//				"RENDER : ID already used when adding : ", element.toString()));
+//			}
 			}
 		}
 	}
 	
 	private static void addBackGround(String name) {
 		BackGround bg = new BackGround(name);
+		System.out.println("Chargement fond");
 		game.window.getElements().add((IRenderable) bg);
 	}
 	
@@ -132,13 +138,16 @@ public class Game implements Runnable {
 			}
 		}
 	}
+	
+	public static void addMouse(MouseListener m) {
+		game.window.addMouseListener(m);
+	}
 
 	public MusicManager getMusic() {
 		return this.music;
 	}
 	
 	private static void disable(String id) {
-		System.out.println("Disabling " + id);
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(id)) {
 				iUpdatable.setActive(false);
@@ -148,16 +157,16 @@ public class Game implements Runnable {
 		for (IRenderable iRenderable : game.window.getElements()) {
 			if (((IGameElement) iRenderable).getId().equals(id)) {
 				iRenderable.setActiveRender(false);
-				System.out.println(iRenderable.needRender());
+				System.out.println("Disabling " + id);
 			}
 		}
 	}
 	
 	private static void enable(String id) {
-		System.out.println("Enabling " + id);
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(id)) {
 				iUpdatable.setActive(true);
+				System.out.println("Enabling " + id);
 				break;
 			}
 		}
@@ -165,6 +174,7 @@ public class Game implements Runnable {
 		for (IRenderable iRenderable : game.window.getElements()) {
 			if (((IGameElement) iRenderable).getId().equals(id)) {
 				iRenderable.setActiveRender(true);
+				System.out.println("Enabling " + id);
 				break;
 			}
 		}
@@ -176,6 +186,7 @@ public class Game implements Runnable {
 			GAME_STATE = newGameState;
 			switch (GAME_STATE) {
 			case STATE_MENU:
+				enable("menu");
 				disable("level_1");
 				disable("level_2");
 				disable("level_3");
@@ -185,10 +196,12 @@ public class Game implements Runnable {
 				enable("button_2");
 				enable("button_3");
 				enable("button_4");
+				MainMenu.activ = true;
+				//Game.addBackGround("ImageMenu");
 				unloadPickups();
-				addBackGround("ImageMenu");
 				break;
 			case STATE_LVL1:
+				disable("menu");
 				enable("level_1");
 				disable("level_2");
 				disable("level_3");
@@ -201,8 +214,10 @@ public class Game implements Runnable {
 				unloadPickups();
 				loadPickups("level_1");
 				addBackGround("fondblanc");
+				MainMenu.activ = false;
 				break;
 			case STATE_LVL2:
+				disable("menu");
 				disable("level_1");
 				enable("level_2");
 				disable("level_3");
@@ -214,8 +229,10 @@ public class Game implements Runnable {
 				disable("button_4");
 				unloadPickups();
 				loadPickups("level_2");
+				MainMenu.activ = false;
 				break;
 			case STATE_LVL3:
+				disable("menu");
 				disable("level_1");
 				disable("level_2");
 				disable("level_3");
@@ -225,10 +242,12 @@ public class Game implements Runnable {
 				disable("button_2");
 				disable("button_3");
 				disable("button_4");
+				MainMenu.activ = false;
 				unloadPickups();
 				loadPickups("level_3");
 				break;
 			case STATE_LVL4:
+				disable("menu");
 				disable("level_1");
 				disable("level_2");
 				disable("level_3");
@@ -238,6 +257,7 @@ public class Game implements Runnable {
 				disable("button_2");
 				disable("button_3");
 				disable("button_4");
+				MainMenu.activ = false;
 				unloadPickups();
 				loadPickups("level_4");
 				break;

@@ -22,7 +22,7 @@ public class BackGround extends IGameElement implements IRenderable {
 		try {
 			im = ImageIO.read(file);
 		} catch (IOException e) {
-			System.out.print("Problème d'ouverture");
+			System.out.print("Problï¿½me d'ouverture");
 			e.printStackTrace();
 		}
 	}
@@ -33,19 +33,18 @@ public class BackGround extends IGameElement implements IRenderable {
 	
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(im, -50, 0, 1300, 900, null);
+		g.drawImage(im, 0, 0, 1300, 900, null);
 	}
 
 	@Override
 	public int getLayer() {
 		// TODO Auto-generated method stub
-		return 1;
+		return 0;
 	}
 
 	@Override
 	public void setActiveRender(boolean b) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
