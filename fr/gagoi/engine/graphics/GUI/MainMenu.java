@@ -42,8 +42,7 @@ public class MainMenu extends IGameElement implements IRenderable{
 		for (int i = 0; i < buttons.length; i++) {
 			final int j = i;
 			buttons[i] = new EButton("button_" + (i + 1),
-					new Polygon(butpos[i][0], butpos[i][1], butpos[i][0].length),
-					i+1) {
+					new Polygon(butpos[i][0], butpos[i][1], butpos[i][0].length), i+1) {
 				@Override
 				public void action() {
 					Game.setGameState(Game.STATE_LVL1 + j);

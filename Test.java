@@ -13,7 +13,7 @@ import fr.wiyochi.level.Level;
 public class Test {
 	
 	public static void main(String[] args) {
-		Game.init("TEST", new Dimension(1280, 720),3);
+		Game.init("TEST", new Dimension(1280, 720),2);
 
 		loadTextures();
 		

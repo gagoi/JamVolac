@@ -102,10 +102,6 @@ public class Game implements Runnable {
 		}
 	}
 	
-	public static void addMouse(MouseListener m) {
-		game.window.addMouseListener(m);
-	}
-	
 	@Override
 	public void run() {
 		isRunning = true;
@@ -137,6 +133,10 @@ public class Game implements Runnable {
 				fpsTimer = System.currentTimeMillis();
 			}
 		}
+	}
+	
+	public static void addMouse(MouseListener m) {
+		game.window.addMouseListener(m);
 	}
 
 	public MusicManager getMusic() {
