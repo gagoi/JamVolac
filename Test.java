@@ -26,6 +26,8 @@ public class Test {
 		Game.addElement(menu);
 		Game.setGameState(Game.STATE_MENU);
 		
+		
+		Game.addElement(menu);
 		Game.start();
 	}
 

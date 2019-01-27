@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import fr.gagoi.engine.Game;
 import fr.gagoi.engine.entities.Entity;
 import fr.gagoi.engine.entities.Hitbox;
 import fr.gagoi.engine.entities.Pickup;
@@ -13,6 +14,7 @@ import fr.gagoi.engine.graphics.TextureManager;
 public class Level extends Entity {
 
 	BufferedImage backgroundImg, lvlImg;
+	ArrayList<Block> blocks;
 	ArrayList<Pickup> pickups;
 
 	public Level(int lvlId, String fileName) {
@@ -37,6 +39,18 @@ public class Level extends Entity {
 		});
 
 		char[][] charMap = loader.getMap();
+		
+		for (int y = 0; y < charMap.length; y++) {
+			for (int x = 0; x < charMap[y].length; x++) {
+				String id = new String() + charMap[y][x];
+				Block b = new Block(id, 2, 4, new Hitbox(x*32, y*32, 32, 32));
+				if (!isHard(charMap[y][x]))
+					b.setActive(false);
+				if (isAnimated(charMap[y][x]))
+					b.LoadAnimation(charMap[y][x]);
+				Game.addElement(b);
+			}
+		}
 
 		this.img = new BufferedImage[4];
 		// hitbox = new Hitbox();
