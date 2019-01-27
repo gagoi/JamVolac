@@ -8,19 +8,26 @@ import fr.gagoi.engine.entities.Player;
 import fr.gagoi.engine.graphics.TextureManager;
 import fr.gagoi.engine.graphics.BackGround;
 import fr.gagoi.engine.graphics.GUI.MainMenu;
+import fr.wiyochi.level.Level;
 
 public class Test {
 	
 	public static void main(String[] args) {
-		Game.init("TEST", new Dimension(1280, 720), 2);
+		Game.init("TEST", new Dimension(1280, 720),3);
 
 		loadTextures();
 		
+		Player p = new Player();
+		//Level l = new Level(1, System.getenv("resourcesPath") + "/levels/level1");
+		
+		
 		MainMenu menu = new MainMenu();
-		Game.rmBackGround();
+		//Game.rmBackGround();
+		Game.addElement(menu);
 		Game.setGameState(Game.STATE_MENU);
 		
-		Game.addElement(menu);
+		//Game.addElement(l);
+		Game.addElement(p);
 		Game.start();
 	}
 

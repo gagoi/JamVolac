@@ -23,9 +23,11 @@ public class GamePanel extends JPanel {
 		this.nbLayers = nbLayers;
 		img = new BufferedImage[nbLayers + 1];
 		renderables = new ArrayList<IRenderable>();
-		for (int i = 0; i < nbLayers + 1; ++i)
+		for (int i = 0; i < nbLayers + 1; ++i) {
 			img[i] = new BufferedImage(size.width, size.height,
 					BufferedImage.TYPE_INT_ARGB);
+			System.out.println("Color : " + img[i].getGraphics().getColor());
+		}
 	}
 
 	@Override
@@ -37,7 +39,8 @@ public class GamePanel extends JPanel {
 
 	private void clear() {
 		for (BufferedImage bufferedImage : img) {
-			bufferedImage.getGraphics().clearRect(0, 0, size.width, size.height);
+			//bufferedImage.getGraphics().clearRect(0, 0, size.width, size.height);
+			bufferedImage = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
 		}
 	}
 

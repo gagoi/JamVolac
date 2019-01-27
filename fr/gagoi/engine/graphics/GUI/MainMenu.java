@@ -5,15 +5,19 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 import fr.gagoi.engine.Game;
+import fr.gagoi.engine.IGameElement;
+import fr.gagoi.engine.entities.Hitbox;
+import fr.gagoi.engine.entities.IUpdatable;
 import fr.gagoi.engine.graphics.IRenderable;
 import fr.gagoi.engine.graphics.TextureManager;
 import fr.wiyochi.level.Level;
 
-public class MainMenu implements IRenderable{
+public class MainMenu extends IGameElement implements IRenderable {
 	private EButton[] buttons;
 	private Level[] levels;
 	
@@ -55,13 +59,13 @@ public class MainMenu implements IRenderable{
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(TextureManager.getTexture("menu"), 0, 0, null);
-		System.out.println("Affichage menu");
+		BufferedImage im = TextureManager.getTexture("menu");
+		g.drawImage(im, 0, 0, null);
 	}
 
 	@Override
 	public int getLayer() {
-		return 2;
+		return 1;
 	}
 
 	@Override
@@ -72,6 +76,12 @@ public class MainMenu implements IRenderable{
 	@Override
 	public boolean needRender() {
 		return activ;
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return ("menu");
 	}
 	
 	
