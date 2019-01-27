@@ -17,6 +17,7 @@ import fr.wiyochi.level.Level;
 
 public class Game implements Runnable {
 
+<<<<<<< HEAD
 	public static final int STATE_MENU = 0;
 	public static final int STATE_LVL1 = 1;
 	public static final int STATE_LVL2 = 2;
@@ -25,10 +26,13 @@ public class Game implements Runnable {
 
 	private static int GAME_STATE = -1;
 	private static Game game = null;
+=======
+	public static Game game = null;
+>>>>>>> Collision
 
 	private Display window;
 	public static boolean isRunning;
-	private static List<IUpdatable> updatables = new ArrayList<IUpdatable>();
+	public static List<IUpdatable> updatables = new ArrayList<IUpdatable>();
 	private MusicManager music;
 
 	public static void init(String name, Dimension size, int nbLayer) {

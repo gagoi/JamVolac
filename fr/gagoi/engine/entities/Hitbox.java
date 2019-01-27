@@ -1,49 +1,52 @@
 package fr.gagoi.engine.entities;
 
-import java.awt.Polygon;
-
 public class Hitbox {
-
-	public Polygon p;
 	
-	public Hitbox() {
-		p = new Polygon();
-	}
+	float x,y,w,h;
 
 	public Hitbox(int x, int y, int width, int height) {
-		p = new Polygon();
-		p.addPoint(x, y);
-		p.addPoint(x + width, y);
-		p.addPoint(x + width, y + height);
-		p.addPoint(x, y + height);
+		this.x = x;
+		this.y = y;
+		this.w = width;
+		this.h = height;
 	}
 
+	public boolean contain(float xp, float yp) {
+		return this.x <= xp && this.x + this.w >= xp && this.y <= yp && this.y + this.h >= yp;
+	}
+	
 	public boolean collide(Hitbox hitbox) {
-		return p.intersects(hitbox.p.getBounds2D());
+		return (this.contain(hitbox.x, hitbox.y) || this.contain(hitbox.x + hitbox.w, hitbox.y)
+				|| this.contain(hitbox.x + w, hitbox.y + h) || this.contain(hitbox.x, hitbox.y + h));
 	}
 	
-	public int getX() {
-		return p.xpoints[0];
+	public float getX() {
+		return x;
 	}
 	
-	public int getY() {
-		return p.ypoints[0];
+	public void setY(float f) 
+	{
+		this.y = f;
 	}
-	
-	public int getWidth() {
-		return p.xpoints[1] - p.xpoints[0];
-	}
-	
-	public int getHeight() {
-		return p.ypoints[2] - p.ypoints[0];
+	public float getY() {
+		return y;
 	}
 
-	public void translate(int i, int j) {
-		p.translate(i, j);
+	public float getWidth() {
+		return w;
 	}
-	
+
+	public float getHeight() {
+		return h;
+	}
+
+	public void translate(float x, float y) {
+		this.x += x;
+		this.y += y;
+	}
+
 	@Override
 	public String toString() {
-		return super.toString() + String.format("{%d, %d, %d, %d}", getX(), getY(), getWidth(), getHeight());
+		return super.toString() + String.format("{%f, %f, %f, %f}", getX(), getY(), getWidth(), getHeight());
 	}
 }

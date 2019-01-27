@@ -12,14 +12,18 @@ public interface IUpdatable {
 	default public boolean hasWeight() {return true;};
 	
 	/*
-	 * Renvoie la maniere dont l'objet est affecté par la gravité. (2 -> 2 fois plus lourd).
+	 * Renvoie la maniere dont l'objet est affecté par la gravité.
+	 * (2 -> 2 fois plus lourd).
 	 */
 	default public float getWeight() {return 1;};
 	
 	/*
-	 * Renvoie si oui ou non l'objet peut entrer en collision avec les utres objets du jeu.
+	 * Renvoie si oui ou non l'objet peut entrer en collision avec
+	 * les autres objets du jeu.
 	 */
 	default public boolean hasInGameHitbox() {return true;};
+	
+	public Hitbox getHitbox();
 	
 	/*
 	 * Renvoie si oui ou non l'objet est cliquable.

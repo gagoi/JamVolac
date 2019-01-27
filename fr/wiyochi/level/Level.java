@@ -8,7 +8,6 @@ import java.util.HashMap;
 import fr.gagoi.engine.entities.Entity;
 import fr.gagoi.engine.entities.Hitbox;
 import fr.gagoi.engine.entities.Pickup;
-import fr.gagoi.engine.graphics.TextureManager;
 
 public class Level extends Entity {
 
@@ -39,6 +38,7 @@ public class Level extends Entity {
 		
 		char[][] charMap = loader.getMap();
 		
+<<<<<<< HEAD
 		this.img = new BufferedImage[4];
 		hitbox = new Hitbox();
 		
@@ -67,9 +67,22 @@ public class Level extends Entity {
 								TextureManager.getTexture(charMap[y][x] + ""),
 								x * 32, y * 32, 32, 32, null);
 					}
+=======
+		//hitbox = new Hitbox();
+		/*
+		for (int y = 0; y < charMap.length; y++) {
+			for (int x = 0; x < charMap[y].length; x++) {
+				if (isHard(charMap[y][x])) {
+					
+					hitbox.p.addPoint(x * 32, y * 32);
+					hitbox.p.addPoint((x + 1) * 32, y * 32);
+					hitbox.p.addPoint((x + 1) * 32, (y + 1) * 32);
+					hitbox.p.addPoint(x * 32, (y + 1) * 32);
+>>>>>>> Collision
 				}
 			}
 		}
+		*/
 	}
 
 	@Override

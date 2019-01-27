@@ -55,6 +55,7 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 
 	@Override
 	public void render(Graphics g) {
+<<<<<<< HEAD
 		if (needRender)
 			if (nbSprites == 1)
 				g.drawImage(TextureManager.getTexture(getId()), hitbox.getX(), hitbox.getY(), hitbox.getWidth(),
@@ -62,6 +63,12 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 			else if (nbSprites > 1)
 				g.drawImage(img[(int) ((System.nanoTime() / (1000000000 / vitesse)) % nbSprites)], hitbox.getX(),
 						hitbox.getY(), null);
+=======
+		if (nbSprites == 1) 
+			g.drawImage(TextureManager.getTexture(getId()), (int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(),(int) hitbox.getHeight(), null);
+		if (nbSprites > 1)
+			g.drawImage(img[(int) ((System.nanoTime() / (1000 / vitesse) ) % nbSprites)], (int)hitbox.getX(), (int)hitbox.getY(), null);
+>>>>>>> Collision
 	}
 
 	public SoundManager getSound() {
@@ -88,10 +95,14 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 		return 1;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public boolean hasInGameHitbox() {
 		return isActive;
 	}
+=======
+	
+>>>>>>> Collision
 
 	@Override
 	public void update(List<IUpdatable> map) {
@@ -103,11 +114,18 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 	}
 	
 	@Override
+<<<<<<< HEAD
 	public void setActive(boolean b) {
 		this.isActive = b;
 		
 	}
 
+=======
+	public Hitbox getHitbox() {
+		return(this.hitbox);
+	}
+	
+>>>>>>> Collision
 	@Override
 	public String toString() {
 		return super.toString() + String.format("{%s, %d, %d, %d, %d}", getId(), hitbox.getX(), hitbox.getY(),
