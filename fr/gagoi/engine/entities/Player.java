@@ -90,13 +90,11 @@ public class Player extends Entity {
 
 		return ilyenaune;
 	}
-<<<<<<< HEAD
 	
 	@Override
 	public int getLayer() {
 		return 2;
 	}
-=======
 
 	private boolean esgibteinplateformADroite() {
 		boolean ilyenaune = false;
@@ -111,6 +109,4 @@ public class Player extends Entity {
 
 		return ilyenaune;
 	}
-
->>>>>>> Collision
 }

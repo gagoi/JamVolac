@@ -8,7 +8,7 @@ import java.util.List;
 
 import fr.gagoi.engine.entities.IUpdatable;
 
-public abstract class EButton extends EGuiElement implements MouseListener {
+public abstract class EButton extends EGuiElement  implements MouseListener {
 
 	private boolean needRender = true;
 	private boolean isActive = true;
@@ -46,16 +46,6 @@ public abstract class EButton extends EGuiElement implements MouseListener {
 	@Override
 	public void render(Graphics g) {
 				
-	}
-	@Override
-	public void update(List<IUpdatable> list) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setActive(boolean b) {
-		isActive = b;
 	}
 
 	@Override

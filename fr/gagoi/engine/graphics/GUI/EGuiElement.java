@@ -7,7 +7,7 @@ import fr.gagoi.engine.IGameElement;
 import fr.gagoi.engine.entities.IUpdatable;
 import fr.gagoi.engine.graphics.IRenderable;
 
-public abstract class EGuiElement extends IGameElement implements IUpdatable, IRenderable {
+public abstract class EGuiElement extends IGameElement implements IRenderable {
 
 	private String id;
 	private Polygon hitbox;
@@ -26,21 +26,6 @@ public abstract class EGuiElement extends IGameElement implements IUpdatable, IR
 		return hitbox.contains(p);
 	}
 	
-	@Override
-	public boolean canBeClicked() {
-		return true;
-	}
-
-	@Override
-	public boolean hasWeight() {
-		return false;
-	}
-
-	@Override
-	public boolean hasInGameHitbox() {
-		return false;
-	}
-
 	@Override
 	public String getId() {
 		return this.id;

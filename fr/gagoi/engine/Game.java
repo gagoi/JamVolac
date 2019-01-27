@@ -2,8 +2,6 @@ package fr.gagoi.engine;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.WindowEvent;
-import java.lang.Thread.State;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +9,11 @@ import fr.gagoi.engine.entities.IUpdatable;
 import fr.gagoi.engine.entities.Pickup;
 import fr.gagoi.engine.graphics.Display;
 import fr.gagoi.engine.graphics.IRenderable;
-
 import fr.gagoi.music.MusicManager;
 import fr.wiyochi.level.Level;
 
 public class Game implements Runnable {
 
-<<<<<<< HEAD
 	public static final int STATE_MENU = 0;
 	public static final int STATE_LVL1 = 1;
 	public static final int STATE_LVL2 = 2;
@@ -25,11 +21,8 @@ public class Game implements Runnable {
 	public static final int STATE_LVL4 = 4;
 
 	private static int GAME_STATE = -1;
-	private static Game game = null;
-=======
+	
 	public static Game game = null;
->>>>>>> Collision
-
 	private Display window;
 	public static boolean isRunning;
 	public static List<IUpdatable> updatables = new ArrayList<IUpdatable>();
@@ -52,7 +45,7 @@ public class Game implements Runnable {
 		new Thread(game).start();
 	}
 
-	public static void addElement(IGameElement element) {
+	public static void addElement(Object element) {
 		if (element instanceof IUpdatable) {
 			if (!updatables.contains((IUpdatable) element)) {
 				updatables.add((IUpdatable) element);
