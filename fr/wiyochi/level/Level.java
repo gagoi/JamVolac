@@ -75,7 +75,7 @@ public class Level extends Entity {
 	@Override
 	public void render(Graphics g) {
 		lvlImg = img[(int) ((System.nanoTime() / 200000000) % 4)];
-		g.drawImage(lvlImg, 0, 0, null);
+		//g.drawImage(lvlImg, 0, 0, null);
 		for (Pickup pickup : pickups) {
 			pickup.render(g);
 		}
