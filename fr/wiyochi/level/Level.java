@@ -46,9 +46,9 @@ public class Level extends Entity {
 				Block b = new Block(id, 2, 4, new Hitbox(x * 32, y * 32, 32, 32));
 				b.setActiveRender(false);
 				blocks.add(b);
-				if (isAnimated(charMap[y][x]))
+				if (isAnimated(charMap[y][x])) {
 					b.LoadAnimation(charMap[y][x]);
-				Game.addElement(b);
+				}
 			}
 		}
 		this.img = new BufferedImage[4];
@@ -72,17 +72,21 @@ public class Level extends Entity {
 	}
 
 	private boolean isHard(char c) {
-		String codes = "BCD";
+		String codes = "BCDHFGR";
 		return codes.contains("" + c);
 	}
 
 	private boolean isAnimated(char c) {
-		String codes = "BCD";
+		String codes = "BCDHFGR";
 		return codes.contains("" + c);
 	}
 
 	public ArrayList<Pickup> getPickups() {
 		return (pickups);
+	}
+	
+	public ArrayList<Block> getBlocks() {
+		return (blocks);
 	}
 
 	@Override

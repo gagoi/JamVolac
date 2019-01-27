@@ -60,16 +60,18 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 				g.drawImage(TextureManager.getTexture(getId()),
 						(int) hitbox.getX(), (int) hitbox.getY(),
 						(int) hitbox.getWidth(), (int) hitbox.getHeight(), null);
-			else if (nbSprites > 1)
+			else {
 				g.drawImage(img[(int) ((System.nanoTime() / (1000000000 / vitesse))
-						% nbSprites)],(int) hitbox.getX(),(int)hitbox.getY(), null);
-		if (nbSprites == 1) 
-			g.drawImage(TextureManager.getTexture(getId()),
-					(int) hitbox.getX(), (int) hitbox.getY(),
-					(int) hitbox.getWidth(),(int) hitbox.getHeight(), null);
-		if (nbSprites > 1)
-			g.drawImage(img[(int) ((System.nanoTime() / (1000 / vitesse) )
-					% nbSprites)], (int)hitbox.getX(), (int)hitbox.getY(), null);
+						% nbSprites)],(int) hitbox.getX(),(int)hitbox.getY(),
+						(int) hitbox.getWidth(), (int) hitbox.getHeight(), null);
+			}
+//		if (nbSprites == 1) 
+//			g.drawImage(TextureManager.getTexture(getId()),
+//					(int) hitbox.getX(), (int) hitbox.getY(),
+//					(int) hitbox.getWidth(),(int) hitbox.getHeight(), null);
+//		if (nbSprites > 1)
+//			g.drawImage(img[(int) ((System.nanoTime() / (1000 / vitesse) )
+//					% nbSprites)], (int)hitbox.getX(), (int)hitbox.getY(), null);
 
 	}
 

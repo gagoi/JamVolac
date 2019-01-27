@@ -15,8 +15,8 @@ public class Block extends Entity {
 	@Override
 	public void render(Graphics g) {
 		if (needRender()) {
-			//super.render(g);
-			g.drawImage(TextureManager.getTexture(id), (int) hitbox.getX(), (int) hitbox.getY(), 32, 32, null);
+			super.render(g);
+			//g.drawImage(TextureManager.getTexture(id),(int) hitbox.getX(), (int) hitbox.getY(), 32, 32, null);
 		}
 	}
 

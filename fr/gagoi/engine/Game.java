@@ -15,6 +15,7 @@ import fr.gagoi.engine.graphics.Display;
 import fr.gagoi.engine.graphics.IRenderable;
 import fr.gagoi.engine.graphics.GUI.MainMenu;
 import fr.gagoi.music.MusicManager;
+import fr.wiyochi.level.Block;
 import fr.wiyochi.level.Level;
 
 public class Game implements Runnable {
@@ -99,12 +100,33 @@ public class Game implements Runnable {
 		}
 	}
 	
+	private static void loadBlocks(String name_lvl){
+		Level l = null;
+		for (IUpdatable iUpdatable : updatables) {
+			if (((IGameElement) iUpdatable).getId().equals(name_lvl)) {
+				l = (Level) iUpdatable;
+				break;
+			}
+		}
+		for (Block b : l.getBlocks()) {
+			addElement(b);
+		}
+	}
+	
 	private static void unloadPickups(){
 		for (IUpdatable obj : updatables) {
 			if(obj instanceof Pickup)
 				updatables.remove(obj);
 		}
 	}
+	
+	private static void unloadBlocks(){
+		for (IUpdatable obj : updatables) {
+			if(obj instanceof Block)
+				updatables.remove(obj);
+		}
+	}
+	
 	
 	@Override
 	public void run() {
@@ -214,6 +236,7 @@ public class Game implements Runnable {
 				unloadPickups();
 				loadPickups("level_1");
 				addBackGround("fondblanc");
+				loadBlocks("level_1");
 				MainMenu.activ = false;
 				break;
 			case STATE_LVL2:
