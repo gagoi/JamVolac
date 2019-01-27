@@ -1,6 +1,10 @@
 package fr.gagoi.engine.graphics.GUI;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Polygon;
+
+import javax.swing.JFrame;
 
 import fr.gagoi.engine.Game;
 import fr.wiyochi.level.Level;
@@ -15,7 +19,8 @@ public class MainMenu {
 		levels = new Level[1];
 
 		for (int i = 0; i < levels.length; i++) {
-			levels[i] = new Level(i+1, System.getenv("resourcesPath") + "/levels/level" + (i + 1));
+			levels[i] = new Level(i+1, System.getenv("resourcesPath")
+					+ "/levels/level" + (i + 1));
 
 			Game.addElement(levels[i]);
 		}

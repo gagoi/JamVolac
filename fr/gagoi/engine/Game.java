@@ -15,7 +15,7 @@ import fr.gagoi.engine.entities.Pickup;
 import fr.gagoi.engine.graphics.BackGround;
 import fr.gagoi.engine.graphics.Display;
 import fr.gagoi.engine.graphics.IRenderable;
-
+import fr.gagoi.engine.graphics.GUI.EButton;
 import fr.gagoi.music.MusicManager;
 import fr.wiyochi.level.Level;
 

@@ -48,7 +48,6 @@ public class GamePanel extends JPanel {
 			if (rend.needRender())
 				rend.render(img[rend.getLayer()].getGraphics());
 		}
-
 		for (int i = 0; i < nbLayers; i++) {
 			img[nbLayers].getGraphics().drawImage(img[i], 0, 0, null);
 		}
