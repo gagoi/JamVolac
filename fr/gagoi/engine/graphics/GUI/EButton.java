@@ -55,7 +55,7 @@ public abstract class EButton extends EGuiElement  implements MouseListener {
 	@Override
 	public void render(Graphics g) {
 		if(needRender) {
-			g.setColor(Color.RED);
+			g.setColor(Color.BLUE);
 			g.fillPolygon(getHitbox());
 		}
 	}

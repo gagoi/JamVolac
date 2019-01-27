@@ -138,10 +138,10 @@ public class Game implements Runnable {
 	}
 	
 	private static void disable(String id) {
-		System.out.println("Disabling " + id);
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(id)) {
 				iUpdatable.setActive(false);
+				System.out.println("Disabling " + id);
 			}
 		}
 		
@@ -154,10 +154,10 @@ public class Game implements Runnable {
 	}
 	
 	private static void enable(String id) {
-		System.out.println("Enabling " + id);
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(id)) {
 				iUpdatable.setActive(true);
+				System.out.println("Enabling " + id);
 				break;
 			}
 		}

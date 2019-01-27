@@ -60,7 +60,7 @@ public class MainMenu implements IRenderable{
 
 	@Override
 	public int getLayer() {
-		return 2;
+		return 0;
 	}
 
 	@Override

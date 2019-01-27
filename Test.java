@@ -12,7 +12,7 @@ import fr.gagoi.engine.graphics.GUI.MainMenu;
 public class Test {
 	
 	public static void main(String[] args) {
-		Game.init("TEST", new Dimension(1280, 720), 2);
+		Game.init("TEST", new Dimension(1280, 720), 1);
 
 		loadTextures();
 		
