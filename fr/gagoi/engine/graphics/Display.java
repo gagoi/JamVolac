@@ -1,5 +1,6 @@
 package fr.gagoi.engine.graphics;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
@@ -21,6 +22,7 @@ public class Display extends JFrame {
 		this.getContentPane().add(this.canvas);
 		this.setSize(size);
 		this.setResizable(false);
+		this.getContentPane().setBackground(Color.WHITE);
 		this.addWindowStateListener(new WindowStateListener() {
 
 			@Override

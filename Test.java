@@ -6,6 +6,7 @@ import java.util.Properties;
 import fr.gagoi.engine.Game;
 import fr.gagoi.engine.entities.Player;
 import fr.gagoi.engine.graphics.TextureManager;
+import fr.gagoi.engine.graphics.BackGround;
 import fr.gagoi.engine.graphics.GUI.MainMenu;
 
 public class Test {
@@ -15,15 +16,14 @@ public class Test {
 
 		loadTextures();
 
-		//Level l = new Level(0, System.getenv("resourcesPath") + "/levels/level1");
-		Player e = new Player();
-		
-		//Game.addElement(l);
+		Game.addElement(bg);
+		Game.addElement(l);
 		Game.addElement(e);
 		
 		
 		
 		MainMenu menu = new MainMenu();
+		Game.rmBackGround();
 		Game.setGameState(Game.STATE_MENU);
 		
 		

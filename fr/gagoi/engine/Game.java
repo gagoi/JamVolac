@@ -5,8 +5,11 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import fr.gagoi.engine.entities.IUpdatable;
 import fr.gagoi.engine.entities.Pickup;
+import fr.gagoi.engine.graphics.BackGround;
 import fr.gagoi.engine.graphics.Display;
 import fr.gagoi.engine.graphics.IRenderable;
 import fr.gagoi.music.MusicManager;
@@ -33,7 +36,6 @@ public class Game implements Runnable {
 			game = new Game();
 			game.window = new Display(name, size, nbLayer);
 			game.window.activeRender(true);
-			game.window.setBackground(Color.WHITE);;
 			game.window.getContentPane().setBackground(Color.WHITE);;
 			game.window.getContentPane().setVisible(true);
 			game.music = new MusicManager();
@@ -61,6 +63,21 @@ public class Game implements Runnable {
 				System.out.println(String.format("RENDER : ID already used when adding : ", element.toString()));
 			}
 		}
+	}
+	
+	private static void addBackGround(String name) {
+		BackGround bg = new BackGround(name);
+		game.window.getElements().add((IRenderable) bg);
+	}
+	
+	public static void rmBackGround() {
+		IRenderable mem = null;
+		for (IRenderable e : game.window.getElements()) {
+			if(e instanceof BackGround)
+				mem = e;
+		}
+		if(mem!=null)
+			game.window.getElements().remove(mem);
 	}
 	
 	private static void loadPickups(String name_lvl){
@@ -169,6 +186,7 @@ public class Game implements Runnable {
 				enable("button_3");
 				enable("button_4");
 				unloadPickups();
+				addBackGround("ImageMenu");
 				break;
 			case STATE_LVL1:
 				enable("level_1");
@@ -182,6 +200,7 @@ public class Game implements Runnable {
 				disable("button_4");
 				unloadPickups();
 				loadPickups("level_1");
+				addBackGround("fondblanc");
 				break;
 			case STATE_LVL2:
 				disable("level_1");

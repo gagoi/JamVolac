@@ -57,8 +57,9 @@ public class Entity extends IGameElement implements IRenderable, IUpdatable {
 	public void render(Graphics g) {
 		if (needRender)
 			if (nbSprites == 1)
-				g.drawImage(TextureManager.getTexture(getId()), (int) hitbox.getX(),(int) hitbox.getY(), (int)hitbox.getWidth(),
-						(int)hitbox.getHeight(), null);
+				g.drawImage(TextureManager.getTexture(getId()),
+						hitbox.getX(), hitbox.getY(), hitbox.getWidth(),
+						hitbox.getHeight(), null);
 			else if (nbSprites > 1)
 				g.drawImage(img[(int) ((System.nanoTime() / (1000000000 / vitesse)) % nbSprites)],(int) hitbox.getX(),
 						(int)hitbox.getY(), null);

@@ -1,5 +1,6 @@
 package fr.gagoi.engine.graphics;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -23,7 +24,8 @@ public class GamePanel extends JPanel {
 		img = new BufferedImage[nbLayers + 1];
 		renderables = new ArrayList<IRenderable>();
 		for (int i = 0; i < nbLayers + 1; ++i)
-			img[i] = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
+			img[i] = new BufferedImage(size.width, size.height,
+					BufferedImage.TYPE_INT_ARGB);
 	}
 
 	@Override
@@ -46,7 +48,6 @@ public class GamePanel extends JPanel {
 			if (rend.needRender())
 				rend.render(img[rend.getLayer()].getGraphics());
 		}
-
 		for (int i = 0; i < nbLayers; i++) {
 			img[nbLayers].getGraphics().drawImage(img[i], 0, 0, null);
 		}
