@@ -13,6 +13,7 @@ import fr.gagoi.engine.entities.Pickup;
 import fr.gagoi.engine.graphics.BackGround;
 import fr.gagoi.engine.graphics.Display;
 import fr.gagoi.engine.graphics.IRenderable;
+import fr.gagoi.engine.graphics.GUI.MainMenu;
 import fr.gagoi.music.MusicManager;
 import fr.wiyochi.level.Level;
 
@@ -24,7 +25,7 @@ public class Game implements Runnable {
 	public static final int STATE_LVL3 = 3;
 	public static final int STATE_LVL4 = 4;
 
-	private static int GAME_STATE = -1;
+	public static int GAME_STATE = -1;
 	
 	public static Game game = null;
 	private Display window;
@@ -195,6 +196,7 @@ public class Game implements Runnable {
 				enable("button_2");
 				enable("button_3");
 				enable("button_4");
+				MainMenu.activ = true;
 				//Game.addBackGround("ImageMenu");
 				unloadPickups();
 				break;
@@ -212,6 +214,7 @@ public class Game implements Runnable {
 				unloadPickups();
 				loadPickups("level_1");
 				addBackGround("fondblanc");
+				MainMenu.activ = false;
 				break;
 			case STATE_LVL2:
 				disable("menu");
@@ -226,6 +229,7 @@ public class Game implements Runnable {
 				disable("button_4");
 				unloadPickups();
 				loadPickups("level_2");
+				MainMenu.activ = false;
 				break;
 			case STATE_LVL3:
 				disable("menu");
@@ -238,6 +242,7 @@ public class Game implements Runnable {
 				disable("button_2");
 				disable("button_3");
 				disable("button_4");
+				MainMenu.activ = false;
 				unloadPickups();
 				loadPickups("level_3");
 				break;
@@ -252,6 +257,7 @@ public class Game implements Runnable {
 				disable("button_2");
 				disable("button_3");
 				disable("button_4");
+				MainMenu.activ = false;
 				unloadPickups();
 				loadPickups("level_4");
 				break;

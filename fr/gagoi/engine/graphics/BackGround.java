@@ -33,7 +33,7 @@ public class BackGround extends IGameElement implements IRenderable {
 	
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(im, -50, 0, 1300, 900, null);
+		g.drawImage(im, 0, 0, 1300, 900, null);
 	}
 
 	@Override
@@ -44,8 +44,7 @@ public class BackGround extends IGameElement implements IRenderable {
 
 	@Override
 	public void setActiveRender(boolean b) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

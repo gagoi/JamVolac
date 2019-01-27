@@ -17,7 +17,7 @@ import fr.gagoi.music.SoundManager;
 public class Entity extends IGameElement implements IRenderable, IUpdatable {
 
 	protected Hitbox hitbox;
-	private String id;
+	protected String id;
 	private int nbSprites;
 	private double vitesse;
 	protected BufferedImage[] img;

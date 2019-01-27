@@ -13,7 +13,7 @@ import fr.wiyochi.level.Level;
 public class Test {
 	
 	public static void main(String[] args) {
-		Game.init("TEST", new Dimension(1280, 720),2);
+		Game.init("TEST", new Dimension(1280, 720),3);
 
 		loadTextures();
 		
@@ -23,7 +23,7 @@ public class Test {
 		
 		MainMenu menu = new MainMenu();
 		Game.rmBackGround();
-		Game.setGameState(Game.STATE_LVL1);
+		Game.setGameState(Game.STATE_MENU);
 		
 		
 		Game.addElement(menu);

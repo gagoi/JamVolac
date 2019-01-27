@@ -19,7 +19,7 @@ public class MainMenu extends IGameElement implements IRenderable{
 	private EButton[] buttons;
 	private Level[] levels;
 	
-	private boolean activ;
+	public static boolean activ;
 	
 	private int[][][] butpos = { { { 0, 0, 598, 598 }, { 0, 455, 455, 0 } },
 			{ { 638, 638, 483, 483, 1279, 1279 }, { 306, 495, 495, 719, 719, 306 } },

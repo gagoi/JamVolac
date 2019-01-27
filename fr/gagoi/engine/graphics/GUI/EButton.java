@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import fr.gagoi.engine.Game;
 import fr.gagoi.engine.entities.IUpdatable;
 
-public abstract class EButton extends EGuiElement  implements MouseListener {
+public abstract class EButton extends EGuiElement implements MouseListener {
 
 	private boolean needRender = true;
 	private boolean isActive = true;
@@ -31,13 +31,15 @@ public abstract class EButton extends EGuiElement  implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("Clic");
-		if (getHitbox().contains(e.getPoint())) {
-			c = Color.BLUE;
-			System.out.println("Chargement du niveau "+level);
-			action();
-		} else {
-			c = Color.RED;
+		if (Game.GAME_STATE == Game.STATE_MENU) {
+			System.out.println("Clic");
+			if (getHitbox().contains(e.getPoint())) {
+				c = Color.BLUE;
+				System.out.println("Chargement du niveau " + level);
+				action();
+			} else {
+				c = Color.RED;
+			}
 		}
 	}
 
@@ -56,12 +58,12 @@ public abstract class EButton extends EGuiElement  implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent e) {
 	}
-	
+
 	@Override
 	public void render(Graphics g) {
-		if(needRender) {
+		if (needRender) {
 			g.setColor(c);
-			g.fillPolygon(getHitbox());
+			// g.fillPolygon(getHitbox());
 		}
 	}
 
@@ -69,6 +71,7 @@ public abstract class EButton extends EGuiElement  implements MouseListener {
 	public void setActiveRender(boolean b) {
 		needRender = b;
 	}
+
 	@Override
 	public boolean needRender() {
 		return needRender;

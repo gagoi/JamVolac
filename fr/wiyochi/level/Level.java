@@ -14,7 +14,7 @@ import fr.gagoi.engine.graphics.TextureManager;
 public class Level extends Entity {
 
 	BufferedImage backgroundImg, lvlImg;
-	ArrayList<Block> blocks;
+	ArrayList<Block> blocks = new ArrayList<Block>();
 	ArrayList<Pickup> pickups;
 
 	public Level(int lvlId, String fileName) {
@@ -39,45 +39,37 @@ public class Level extends Entity {
 		});
 
 		char[][] charMap = loader.getMap();
-		
+
 		for (int y = 0; y < charMap.length; y++) {
 			for (int x = 0; x < charMap[y].length; x++) {
 				String id = new String() + charMap[y][x];
-				Block b = new Block(id, 2, 4, new Hitbox(x*32, y*32, 32, 32));
-				if (!isHard(charMap[y][x]))
-					b.setActive(false);
+				Block b = new Block(id, 2, 4, new Hitbox(x * 32, y * 32, 32, 32));
+				if (b.getHitbox().getX() < 500 && b.getHitbox().getY() < 500)
+					System.out.println(b.getHitbox());
+				b.setActiveRender(false);
+				blocks.add(b);
 				if (isAnimated(charMap[y][x]))
 					b.LoadAnimation(charMap[y][x]);
 				Game.addElement(b);
 			}
 		}
-
 		this.img = new BufferedImage[4];
-		// hitbox = new Hitbox();
 
 		for (int i = 0; i < 4; i++) {
 			this.img[i] = new BufferedImage(loader.getX() * 32, loader.getY() * 32, BufferedImage.TYPE_INT_ARGB);
-			/*
-			 * for (int y = 0; y < charMap.length; y++) { for (int x = 0; x <
-			 * charMap[y].length; x++) { if (isHard(charMap[y][x])) { hitbox.p.addPoint(x *
-			 * 32, y * 32); hitbox.p.addPoint((x + 1) * 32, y * 32); hitbox.p.addPoint((x +
-			 * 1) * 32, (y + 1) * 32); hitbox.p.addPoint(x * 32, (y + 1) * 32); }
-			 * 
-			 * 
-			 * if (isAnimated(charMap[y][x])) { String id = new String() + charMap[y][x]; id
-			 * = id + (i+1); img[i].getGraphics().drawImage( TextureManager.getTexture(id),
-			 * x * 32, y * 32, 32, 32, null); } else { img[i].getGraphics().drawImage(
-			 * TextureManager.getTexture(charMap[y][x] + ""), x * 32, y * 32, 32, 32, null);
-			 */
 		}
 	}
 
 	@Override
 	public void render(Graphics g) {
 		lvlImg = img[(int) ((System.nanoTime() / 200000000) % 4)];
-		//g.drawImage(lvlImg, 0, 0, null);
+		// g.drawImage(lvlImg, 0, 0, null);
+
 		for (Pickup pickup : pickups) {
 			pickup.render(g);
+		}
+		for (Block block : blocks) {
+			block.render(g);
 		}
 	}
 
@@ -93,5 +85,22 @@ public class Level extends Entity {
 
 	public ArrayList<Pickup> getPickups() {
 		return (pickups);
+	}
+
+	@Override
+	public void setActive(boolean b) {
+		super.setActive(b);
+		for (Block block : blocks) {
+			if (!isHard(block.getId().charAt(0)))
+				block.setActive(false);
+		}
+	}
+
+	@Override
+	public void setActiveRender(boolean b) {
+		super.setActive(b);
+		for (Block block : blocks) {
+			block.setActiveRender(b);
+		}
 	}
 }
