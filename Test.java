@@ -23,11 +23,11 @@ public class Test {
 		
 		MainMenu menu = new MainMenu();
 		//Game.rmBackGround();
+		Game.addElement(p);
 		Game.addElement(menu);
-		Game.setGameState(Game.STATE_MENU);
+		Game.setGameState(Game.STATE_LVL1);
 		
 		//Game.addElement(l);
-		Game.addElement(p);
 		Game.start();
 	}
 
