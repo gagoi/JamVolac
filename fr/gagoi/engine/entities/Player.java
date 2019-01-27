@@ -3,7 +3,9 @@ package fr.gagoi.engine.entities;
 import java.util.List;
 
 import fr.gagoi.engine.Game;
+import fr.gagoi.engine.graphics.GUI.MainMenu;
 import fr.gagoi.engine.inputs.Keyboard;
+import fr.wiyochi.level.Level;
 
 public class Player extends Entity {
 
@@ -21,32 +23,40 @@ public class Player extends Entity {
 
 	@Override
 	public void update(List<IUpdatable> map) {
-		dx = 0;
-		dy = 0;
+		if (isActive) {
+			dx = 0;
+			dy = 0;
 
-		if (Keyboard.isKeyPressed[Keyboard.RIGHT] && !esgibteinplateformADroite())
-			dx += vx;
-		if (Keyboard.isKeyPressed[Keyboard.LEFT] && !esgibteinplateformAGauche())
-			dx -= vx;
-		if (Keyboard.isKeyPressed[Keyboard.UP] && !esgibteinplateformAudessus() && esgibteinplateformEndessous()) {
-			vy = -10;
-		}
-		if (Math.abs(vy) <= 0.05 && !esgibteinplateformEndessous())
-			vy = 2;
-		if (vy < 0 && !esgibteinplateformAudessus()) {
-			dy += vy;
-			vy *= 0.9;
-		}
-		if (vy > 0 && !esgibteinplateformEndessous()) {
-			dy += vy;
-			vy = (float) Math.min(1.1*vy, 3);
-		}
+			if (Keyboard.isKeyPressed[Keyboard.RIGHT] && !esgibteinplateformADroite())
+				dx += vx;
+			if (Keyboard.isKeyPressed[Keyboard.LEFT] && !esgibteinplateformAGauche())
+				dx -= vx;
+			if (Keyboard.isKeyPressed[Keyboard.UP] && !esgibteinplateformAudessus() && esgibteinplateformEndessous()) {
+				vy = -10;
+			}
+			if (Math.abs(vy) <= 0.05 && !esgibteinplateformEndessous())
+				vy = 2;
+			if (vy < 0 && !esgibteinplateformAudessus()) {
+				dy += vy;
+				vy *= 0.9;
+			}
+			if (vy > 0 && !esgibteinplateformEndessous()) {
+				dy += vy;
+				vy = (float) Math.min(1.1 * vy, 3);
+			}
 
-		if (Keyboard.isKeyPressed[Keyboard.DOWN] && !esgibteinplateformADroite()) {
-			dy += 2;
-		}
+			if (Keyboard.isKeyPressed[Keyboard.DOWN] && !esgibteinplateformADroite()) {
+				dy += 2;
+			}
 
-		hitbox.translate(dx, dy);
+			hitbox.translate(dx, dy);
+
+			map.forEach((e) -> {
+				System.out.println(e.getHitbox());
+				//if (e != null && e != this && e instanceof Entity && ((Entity) e).isActive)
+					e.getHitbox().translate(dx, -dy);
+			});
+		}
 	}
 
 	private boolean esgibteinplateformAudessus() {
@@ -91,7 +101,7 @@ public class Player extends Entity {
 
 		return ilyenaune;
 	}
-	
+
 	@Override
 	public int getLayer() {
 		return 2;

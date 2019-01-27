@@ -14,12 +14,13 @@ import fr.gagoi.engine.graphics.TextureManager;
 public class Level extends Entity {
 
 	BufferedImage backgroundImg, lvlImg;
-	ArrayList<Block> blocks = new ArrayList<Block>();
+	public ArrayList<Block> blocks = new ArrayList<Block>();
 	ArrayList<Pickup> pickups;
 
 	public Level(int lvlId, String fileName) {
 		super("level_" + lvlId);
 		this.load(fileName);
+		hitbox = new Hitbox(-20000000, -200000000, 1, 1);
 	}
 
 	private void load(String filename) {
@@ -61,14 +62,14 @@ public class Level extends Entity {
 	@Override
 	public void render(Graphics g) {
 		lvlImg = img[(int) ((System.nanoTime() / 200000000) % 4)];
-		// g.drawImage(lvlImg, 0, 0, null);
+
 
 		for (Pickup pickup : pickups) {
 			pickup.render(g);
-		}
-		for (Block block : blocks) {
-			block.render(g);
-		}
+		}for (Block pp : blocks) {
+			pp.render(g);
+		}	
+		g.drawImage(lvlImg, 0, 0, null);
 	}
 
 	private boolean isHard(char c) {
@@ -93,8 +94,11 @@ public class Level extends Entity {
 	public void setActive(boolean b) {
 		super.setActive(b);
 		for (Block block : blocks) {
-			if (!isHard(block.getId().charAt(0)))
-				block.setActive(false);
+			//if (!isHard(block.getId().charAt(0)))
+				block.setActive(b);
+		}
+		for (Pickup pickup : pickups) {
+			pickup.setActive(b);
 		}
 	}
 
@@ -103,6 +107,9 @@ public class Level extends Entity {
 		super.setActive(b);
 		for (Block block : blocks) {
 			block.setActiveRender(b);
+		}
+		for (Pickup pickup : pickups) {
+			pickup.setActiveRender(b);
 		}
 	}
 }

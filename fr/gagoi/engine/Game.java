@@ -6,8 +6,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-
+import fr.gagoi.engine.entities.Entity;
 import fr.gagoi.engine.entities.IUpdatable;
 import fr.gagoi.engine.entities.Pickup;
 import fr.gagoi.engine.graphics.BackGround;
@@ -27,7 +26,7 @@ public class Game implements Runnable {
 	public static final int STATE_LVL4 = 4;
 
 	public static int GAME_STATE = -1;
-	
+
 	public static Game game = null;
 	private Display window;
 	public static boolean isRunning;
@@ -39,7 +38,8 @@ public class Game implements Runnable {
 			game = new Game();
 			game.window = new Display(name, size, nbLayer);
 			game.window.activeRender(true);
-			game.window.getContentPane().setBackground(Color.WHITE);;
+			game.window.getContentPane().setBackground(Color.WHITE);
+			;
 			game.window.getContentPane().setVisible(true);
 			game.music = new MusicManager();
 		}
@@ -54,7 +54,7 @@ public class Game implements Runnable {
 		if (element instanceof IUpdatable) {
 			if (!updatables.contains((IUpdatable) element)) {
 				updatables.add((IUpdatable) element);
-			} 
+			}
 //			else {
 //				System.out.println(String.format("UPDATE : ID already used when adding : ", element.toString()));
 //			}
@@ -70,24 +70,24 @@ public class Game implements Runnable {
 			}
 		}
 	}
-	
+
 	private static void addBackGround(String name) {
 		BackGround bg = new BackGround(name);
 		System.out.println("Chargement fond");
 		game.window.getElements().add((IRenderable) bg);
 	}
-	
+
 	public static void rmBackGround() {
 		IRenderable mem = null;
 		for (IRenderable e : game.window.getElements()) {
-			if(e instanceof BackGround)
+			if (e instanceof BackGround)
 				mem = e;
 		}
-		if(mem!=null)
+		if (mem != null)
 			game.window.getElements().remove(mem);
 	}
-	
-	private static void loadPickups(String name_lvl){
+
+	private static void loadPickups(String name_lvl) {
 		Level l = null;
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(name_lvl)) {
@@ -115,7 +115,7 @@ public class Game implements Runnable {
 	
 	private static void unloadPickups(){
 		for (IUpdatable obj : updatables) {
-			if(obj instanceof Pickup)
+			if (obj instanceof Pickup)
 				updatables.remove(obj);
 		}
 	}
@@ -143,7 +143,10 @@ public class Game implements Runnable {
 			if (updateTime <= actualTimer - startTimer) {
 				fps++;
 				updatables.forEach((e) -> {
-					e.update(updatables);
+					if (e != null)
+						if (e instanceof Entity)
+							if (((Entity) e).isActive)
+								e.update(updatables);
 				});
 				game.window.canvas.repaint();
 				startTimer = System.currentTimeMillis();
@@ -160,7 +163,7 @@ public class Game implements Runnable {
 			}
 		}
 	}
-	
+
 	public static void addMouse(MouseListener m) {
 		game.window.addMouseListener(m);
 	}
@@ -168,14 +171,14 @@ public class Game implements Runnable {
 	public MusicManager getMusic() {
 		return this.music;
 	}
-	
+
 	private static void disable(String id) {
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(id)) {
 				iUpdatable.setActive(false);
 			}
 		}
-		
+
 		for (IRenderable iRenderable : game.window.getElements()) {
 			if (((IGameElement) iRenderable).getId().equals(id)) {
 				iRenderable.setActiveRender(false);
@@ -183,7 +186,7 @@ public class Game implements Runnable {
 			}
 		}
 	}
-	
+
 	private static void enable(String id) {
 		for (IUpdatable iUpdatable : updatables) {
 			if (((IGameElement) iUpdatable).getId().equals(id)) {
@@ -192,7 +195,7 @@ public class Game implements Runnable {
 				break;
 			}
 		}
-		
+
 		for (IRenderable iRenderable : game.window.getElements()) {
 			if (((IGameElement) iRenderable).getId().equals(id)) {
 				iRenderable.setActiveRender(true);
@@ -219,7 +222,7 @@ public class Game implements Runnable {
 				enable("button_3");
 				enable("button_4");
 				MainMenu.activ = true;
-				//Game.addBackGround("ImageMenu");
+				// Game.addBackGround("ImageMenu");
 				unloadPickups();
 				break;
 			case STATE_LVL1:

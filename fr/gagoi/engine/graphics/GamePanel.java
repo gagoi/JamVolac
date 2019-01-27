@@ -1,6 +1,5 @@
 package fr.gagoi.engine.graphics;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -36,8 +35,8 @@ public class GamePanel extends JPanel {
 	}
 
 	private void clear() {
-		for (BufferedImage bufferedImage : img) {
-			bufferedImage = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
+		for (int i = 0; i < img.length; i++) {
+			img[i]= new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
 		}
 	}
 
