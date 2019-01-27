@@ -24,18 +24,15 @@ public abstract class EButton extends EGuiElement  implements MouseListener {
 	public EButton(String id, Polygon p, int lvl) {
 		super(id, p);
 		im = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
-		im.createGraphics();
-		im.getGraphics().setColor(Color.RED);
-		im.getGraphics().fillPolygon(p);
 		level = lvl;
 	}
 
-	public abstract void action();
+	public abstract void action(int lvl);
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (p.contains(e.getPoint()))
-			action();
+		if (getHitbox().contains(e.getPoint()))
+			action(level);
 	}
 
 	@Override
@@ -58,7 +55,8 @@ public abstract class EButton extends EGuiElement  implements MouseListener {
 	@Override
 	public void render(Graphics g) {
 		if(needRender) {
-			g.drawImage(im, 200, 200, 32, 32, null);
+			g.setColor(Color.RED);
+			g.fillPolygon(getHitbox());
 		}
 	}
 

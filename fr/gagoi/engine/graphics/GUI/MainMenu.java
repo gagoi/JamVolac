@@ -22,7 +22,7 @@ public class MainMenu implements IRenderable{
 	private int[][][] butpos = { { { 0, 0, 598, 598 }, { 0, 455, 455, 0 } },
 			{ { 638, 638, 483, 483, 1279, 1279 }, { 306, 495, 495, 719, 719, 306 } },
 			{ { 639, 1279, 1279, 639 }, { 0, 0, 266, 266 } },
-			{ { 0, 443, 443, 0 }, { 495, 495, 719, 719 } }, };
+			{ { 0, 443, 443, 0 }, { 495, 495, 719, 719 } } };
 
 	public MainMenu() {
 		
@@ -41,10 +41,10 @@ public class MainMenu implements IRenderable{
 			final int j = i;
 			buttons[i] = new EButton("button_" + (i + 1),
 					new Polygon(butpos[i][0], butpos[i][1], butpos[i][0].length),
-					i) {
+					i+1) {
 				@Override
-				public void action() {
-					Game.setGameState(Game.STATE_LVL1 + j);
+				public void action(int lvl) {
+					Game.setGameState(Game.STATE_LVL1 + lvl);
 				}
 
 			};
@@ -56,7 +56,6 @@ public class MainMenu implements IRenderable{
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(TextureManager.getTexture("menu"), 0, 0, null);
-		System.out.println("Affichage menu");
 	}
 
 	@Override
