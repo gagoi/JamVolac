@@ -18,16 +18,18 @@ public class Test {
 		loadTextures();
 		
 		Player p = new Player();
-		//Level l = new Level(1, System.getenv("resourcesPath") + "/levels/level1");
 		
+		p.setActive(false);
+		p.setActiveRender(false);
 		
 		MainMenu menu = new MainMenu();
 		Game.rmBackGround();
+
 		Game.setGameState(Game.STATE_MENU);
-		
+		Game.start();
 		
 		Game.addElement(menu);
-		Game.start();
+		Game.addElement(p);
 	}
 
 	private static void loadTextures() {
