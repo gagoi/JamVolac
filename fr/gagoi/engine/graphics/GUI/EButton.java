@@ -10,21 +10,24 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import fr.gagoi.engine.Game;
 import fr.gagoi.engine.entities.IUpdatable;
 
 public abstract class EButton extends EGuiElement  implements MouseListener {
 
 	private boolean needRender = true;
 	private boolean isActive = true;
+	private int level;
 	Polygon p;
 	BufferedImage im;
 
-	public EButton(String id, Polygon p) {
+	public EButton(String id, Polygon p, int lvl) {
 		super(id, p);
 		im = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
 		im.createGraphics();
 		im.getGraphics().setColor(Color.RED);
 		im.getGraphics().fillPolygon(p);
+		level = lvl;
 	}
 
 	public abstract void action();

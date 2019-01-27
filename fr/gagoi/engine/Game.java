@@ -176,6 +176,7 @@ public class Game implements Runnable {
 			GAME_STATE = newGameState;
 			switch (GAME_STATE) {
 			case STATE_MENU:
+				enable("menu");
 				disable("level_1");
 				disable("level_2");
 				disable("level_3");
@@ -186,9 +187,9 @@ public class Game implements Runnable {
 				enable("button_3");
 				enable("button_4");
 				unloadPickups();
-				addBackGround("ImageMenu");
 				break;
 			case STATE_LVL1:
+				disable("menu");
 				enable("level_1");
 				disable("level_2");
 				disable("level_3");
@@ -203,6 +204,7 @@ public class Game implements Runnable {
 				addBackGround("fondblanc");
 				break;
 			case STATE_LVL2:
+				disable("menu");
 				disable("level_1");
 				enable("level_2");
 				disable("level_3");
@@ -216,6 +218,7 @@ public class Game implements Runnable {
 				loadPickups("level_2");
 				break;
 			case STATE_LVL3:
+				disable("menu");
 				disable("level_1");
 				disable("level_2");
 				disable("level_3");
@@ -229,6 +232,7 @@ public class Game implements Runnable {
 				loadPickups("level_3");
 				break;
 			case STATE_LVL4:
+				disable("menu");
 				disable("level_1");
 				disable("level_2");
 				disable("level_3");
